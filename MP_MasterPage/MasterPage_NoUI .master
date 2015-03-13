@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_NoUI .master.cs" Inherits="MasterPage_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="<%=ResolveUrl("~/css/main.css") %>" />
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/js/jquery.cookie.js")%>"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/js/main.js") %>"></script>
+
+    <script src=<%=ResolveClientUrl("~/js/main.js") %> ></script>
+
+    <script src=<%=ResolveClientUrl("~/js/Dialog/Dialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/TitleDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/MessageBox.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/SignUpDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/SignUpSuccessDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/LoginDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/ResetPasswordDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/CreatePackageDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/CreateImageDialog.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Dialog/UploadDialog.js") %>></script>
+
+    <script src=<%=ResolveClientUrl("~/js/Format/User.js") %>></script>
+
+    <script src=<%=ResolveClientUrl("~/js/Widget/Frame.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Widget/Search.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Widget/image.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Widget/user-info.js") %>></script>
+    <%
+        var page = Page as MPPage;        
+    %>
+    <script type="text/javascript">
+        MPData=<%=JSON.Stringify(page.MPData)%>
+    </script>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <asp:ContentPlaceHolder ID="body" runat="server">
+
+    </asp:ContentPlaceHolder>
+</body>
+</html>
+

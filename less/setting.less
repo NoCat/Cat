@@ -1,0 +1,91 @@
+﻿@basecolor: #0e8fdb;
+@border-color: #ccc;
+@showdow-color: #aaa;
+
+.setting {
+    background-color: white;
+    border: 1px solid @border-color;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 #aaa;
+    color: #333;
+
+    h1 {
+        border-bottom: 1px solid @border-color;
+        font-size: 21px;
+        font-weight: normal;
+        padding: 9px;
+        text-align: center;
+    }
+
+    .part {
+        border-bottom: 1px solid @border-color;
+        margin: 0 20px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .title {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 15px;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .detail {
+            border-top: 1px dashed #ddd;
+
+            table {
+                margin-left: 50px;
+                font-size: 14px;
+
+                .title {
+                    font-size: 14px;
+                    width: 90px;
+                    padding-right: 10px;
+                    line-height: 35px;
+                    height: 35px;
+                    text-align: right;
+                    vertical-align:top;
+                }
+
+                .save {
+                    padding: 5px 16px;
+                    background-color: @basecolor;
+                    color: white;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 2px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: lighten(@basecolor,5%);
+                    }
+                }
+            }
+
+            input[type="text"] {
+                border: 1px solid #cccccc;
+                border-radius: 3px;
+                box-shadow: 0 0 6px 0 #eee inset;
+                height: 28px;
+                line-height: 28px;
+                padding: 0 8px;
+                width: 200px;
+            }
+
+            textarea {
+                border: 1px solid #cccccc;
+                border-radius: 3px;
+                box-shadow: 0 0 6px 0 #eee inset;
+                height: 28px;
+                line-height: 28px;
+                padding: 0 8px;
+                resize:none;
+                width:400px;
+                height:100px;                
+            }
+        }
+    }
+}

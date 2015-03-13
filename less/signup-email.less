@@ -1,0 +1,39 @@
+﻿//@import "main.less" (reference)  ;
+@import "main.less"  ;
+.form{
+    @formWidth:300px;
+    font-size:14px;
+    border:1px solid darken(@baseWhite,20%);
+    width:@formWidth;
+    padding:20px;
+    border-radius:5px;
+    background-color:@baseWhite;
+    margin:30px auto 0 auto;
+    
+    .title{
+        font-size:16px;
+        border-bottom:1px solid    darken(@baseWhite,10%);
+        padding-bottom:6px;
+        margin-bottom:10px;
+    }
+    .i{
+        margin-top:10px;
+    }
+    input[type="text"],input[type="password"]{
+        @height:30px;
+        @padding:10px;
+        border:1px solid darken(@baseWhite,15%);
+        border-radius:3px;
+        height:@height;
+        line-height:@height;
+        padding:0 @padding;
+        width:(@formWidth)-2-2*@padding;
+    }
+
+    #submit{
+        .btnblue(35px);
+        width:100px;
+        margin:15px auto 0;
+
+    }
+}

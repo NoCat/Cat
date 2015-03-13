@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="<%=ResolveUrl("~/css/main.css") %>" />
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/js/main.js") %>"></script>
+    <script type="text/javascript" src="<%=ResolveUrl("~/js/frame.js") %>"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%
+        var page = Page as MPPage;        
+    %>
+    <script type="text/javascript">
+        MPData=<%=JSON.Stringify(page.MPData)%>
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="wrapper">
+            <div class="menu-bar">
+                <div class="left">
+                    <div class="nav home-nav">
+                        <div class="nav-link">主页</div>
+                    </div>
+                    <div class="nav menu-nav">
+                        <div class="nav-link">
+                            <div class="arrow"></div>
+                        </div>
+                        <div class="hide-menu">
+                        </div>
+                    </div>
+                    <form id="search-form" action="search">
+                        <input type="text" id="keyword" autocomplete="on" placeholder="搜索" />
+                        <div class="go"></div>
+                    </form>
+                </div>
+                <div class="right">
+                    <div id="login">登录</div>
+                    <div id="signup">注册</div>
+                    <div class="nav add-nav">
+                        <div class="nav-link" title="添加">
+                        </div>
+                        <div class="hide-menu"></div>
+                    </div>
+                    <div class="nav user-nav">
+                        <a class="nav-link" href="{0}">
+                            <img class="avt" src="{1}" />
+                            <div class="arrow"></div>
+                        </a>
+                        <div class="hide-menu">
+                            <a class="item" href="{2}">我的主页</a>
+                            <div class="seperator"></div>
+                            <a class="item" href="{3}">我的关注</a>
+                            <a class="item" href="{4}">我的粉丝</a>
+                            <div class="seperator"></div>
+                            <a class="item">设置</a>
+                            <div class="item" id="logout">退出</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <asp:ContentPlaceHolder runat="server" ID="content"></asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>
+

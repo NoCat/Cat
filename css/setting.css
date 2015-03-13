@@ -1,0 +1,76 @@
+.setting {
+  background-color: white;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0 #aaa;
+  color: #333;
+}
+.setting h1 {
+  border-bottom: 1px solid #cccccc;
+  font-size: 21px;
+  font-weight: normal;
+  padding: 9px;
+  text-align: center;
+}
+.setting .part {
+  border-bottom: 1px solid #cccccc;
+  margin: 0 20px;
+}
+.setting .part:last-child {
+  border-bottom: none;
+}
+.setting .part .title {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 15px;
+  font-size: 16px;
+  position: relative;
+}
+.setting .part .detail {
+  border-top: 1px dashed #ddd;
+}
+.setting .part .detail table {
+  margin-left: 50px;
+  font-size: 14px;
+}
+.setting .part .detail table .title {
+  font-size: 14px;
+  width: 90px;
+  padding-right: 10px;
+  line-height: 35px;
+  height: 35px;
+  text-align: right;
+  vertical-align: top;
+}
+.setting .part .detail table .save {
+  padding: 5px 16px;
+  background-color: #0e8fdb;
+  color: white;
+  display: inline-block;
+  text-align: center;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.setting .part .detail table .save:hover {
+  background-color: #139ef0;
+}
+.setting .part .detail input[type="text"] {
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 0 #eee inset;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 8px;
+  width: 200px;
+}
+.setting .part .detail textarea {
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 0 #eee inset;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 8px;
+  resize: none;
+  width: 400px;
+  height: 100px;
+}
