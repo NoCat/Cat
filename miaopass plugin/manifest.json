@@ -1,0 +1,15 @@
+﻿{
+    "name": "miaopass图片收集工具",
+    "description": "右键点击即可下载图片",
+    "version": "0.1",
+	 "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["jquery.js", "miaopass.js"]
+    }
+  ],
+    "permissions": [
+        "http://*/*"
+    ],
+    "manifest_version": 2
+}
