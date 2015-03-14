@@ -50,7 +50,7 @@ public static class Downloader
         {
             DownloadTask task = null;
 
-            if (_tasks.Count == 0)
+            if (_tasks.Count == 0 && _downloadThreadCount==0)
                 LoadTaskFromDB();
 
             if (_tasks.Count != 0 && _downloadThreadCount < 3)

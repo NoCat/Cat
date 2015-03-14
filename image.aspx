@@ -13,8 +13,6 @@
                     <img src="img/236.jpg" />
                 </div>
                 <div class="tool-bar-bottom">
-                    <a class="source">来源：www.miaopass.net
-                    </a>
                     <div class="clear"></div>
                 </div>
             </div>
