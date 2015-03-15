@@ -10,18 +10,20 @@ public partial class image : MPPage
     MPImage _image = null;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //try
-        //{
-        //    int imageid = Tools.GetInt32FromRequest(RouteData.Values["id"] as string);
-        //    _image = new MPImage(imageid);
-        //}
-        //catch
-        //{
-        //    Response.StatusCode = 404;
-        //    Response.End();
-        //}
+        try
+        {
+            int imageid = Tools.GetInt32FromRequest(RouteData.Values["id"] as string);
+            _image = new MPImage(imageid);
+        }
+        catch
+        {
+            Response.StatusCode = 404;
+            Response.End();
+        }
 
         Ajax();
+
+        MPData.image = JSON.ImageDetail(_image, Session["user"] as MPUser);
     }
 
     void Ajax()

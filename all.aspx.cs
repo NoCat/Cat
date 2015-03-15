@@ -40,7 +40,7 @@ public partial class all_aspx : MPPage
         {
             try
             {
-                dataList.Add(JSON.Image(new MPImage(Convert.ToInt32(item[0])), user));
+                dataList.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), user));
             }
             catch { }
         }

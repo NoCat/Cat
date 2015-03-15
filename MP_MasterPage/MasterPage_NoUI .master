@@ -29,6 +29,7 @@
     <script src=<%=ResolveClientUrl("~/js/Widget/Frame.js") %>></script>
     <script src=<%=ResolveClientUrl("~/js/Widget/Search.js") %>></script>
     <script src=<%=ResolveClientUrl("~/js/Widget/image.js") %>></script>
+    <script src=<%=ResolveClientUrl("~/js/Widget/image-view.js") %>></script>
     <script src=<%=ResolveClientUrl("~/js/Widget/user-info.js") %>></script>
     <%
         var page = Page as MPPage;        

@@ -20,38 +20,39 @@ public static class JSON
         };
     }
 
-    public static object UserDetail(MPUser user,MPUser currentUser)
+    public static object UserDetail(MPUser user, MPUser currentUser)
     {
-        int followsCount=0;
+        int followsCount = 0;
         int followersCount = 0;
         int packagesCount = 0;
         int imagesCount = 0;
         int praiseCount = 0;
-        bool followed=false;
+        bool followed = false;
 
-        followsCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from following where userid=?",user.ID));
+        followsCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from following where userid=?", user.ID));
         followersCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from following where type=? and info=?", MPFollowingTypes.User, user.ID));
         packagesCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from package where userid=?", user.ID));
         imagesCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from image where userid=?", user.ID));
         praiseCount = Convert.ToInt32(DB.SExecuteScalar("select count(*) from praise where userid=?", user.ID));
 
-        if(currentUser!=null && currentUser.ID!=user.ID)
+        if (currentUser != null && currentUser.ID != user.ID)
         {
-            var res = DB.SExecuteScalar("select userid from following where userid=? and type=? and info=?", currentUser.ID, MPFollowingTypes.User,user.ID );
+            var res = DB.SExecuteScalar("select userid from following where userid=? and type=? and info=?", currentUser.ID, MPFollowingTypes.User, user.ID);
             if (res != null)
                 followed = true;
         }
 
-        return new{
-            id=user.ID,
-            name=user.Name,
-            default_head=user.DefaultHead,
-            follows_count=followsCount,
-            followers_count=followersCount,
-            packages_count=packagesCount,
-            images_count=imagesCount,
-            praise_count=praiseCount,
-            followed=followed
+        return new
+        {
+            id = user.ID,
+            name = user.Name,
+            default_head = user.DefaultHead,
+            follows_count = followsCount,
+            followers_count = followersCount,
+            packages_count = packagesCount,
+            images_count = imagesCount,
+            praise_count = praiseCount,
+            followed = followed
         };
     }
 
@@ -90,12 +91,12 @@ public static class JSON
         var user = new MPUser(package.UserID);
         result.user = User(user);
 
-        if (currentUser != null && currentUser.ID!=user.ID)
+        if (currentUser != null && currentUser.ID != user.ID)
         {
             bool praised = false;
             bool followed = false;
 
-            if(DB.SExecuteScalar("select userid from praise where userid=? and type=? and info=?",currentUser.ID,MPPraiseTypes.Package,package.ID)!=null)
+            if (DB.SExecuteScalar("select userid from praise where userid=? and type=? and info=?", currentUser.ID, MPPraiseTypes.Package, package.ID) != null)
             {
                 praised = true;
             }
@@ -111,7 +112,7 @@ public static class JSON
         return result;
     }
 
-    public static object Image(MPImage image, MPUser currentUser)
+    public static object ImageDetail(MPImage image, MPUser currentUser)
     {
         MPPackage package = new MPPackage(image.PackageID);
         MPFile file = new MPFile(image.FileID);
@@ -137,6 +138,14 @@ public static class JSON
         };
     }
 
+    public static object Image(MPImage image)
+    {
+        return new
+        {
+            id = image.ID,
+            file = File(new MPFile(image.FileID))
+        };
+    }
     public static string Stringify(object obj)
     {
         return JsonConvert.SerializeObject(obj);
