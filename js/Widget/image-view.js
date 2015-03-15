@@ -34,7 +34,7 @@ MPWidget.ImageView.New = function (imageDetail)
     strVar += "            <\/div>";
     strVar += "        <\/div>";
     strVar += "        <div class=\"ad-piece piece\">";
-    strVar += "             <script charset=\"gbk\" src=\"http://p.tanx.com/ex?i=mm_26054915_7856098_29204897\"></script>";
+    strVar += "             <script charset=\"gbk\" src=\"http://p.tanx.com/ex?i=mm_26054915_7856098_29204897 \"></script>";
     strVar += "        <\/div>";
     strVar += "    <\/div>";
     strVar += "    <div class=\"bottom\"><\/div>";
@@ -43,7 +43,7 @@ MPWidget.ImageView.New = function (imageDetail)
     var res = $(strVar);
     res.Run = function ()
     {
-        var wf = MPWaterFall.New(res.find(".images"), res.find(".image-waterfall"), 3, 78, 1, 1, 1, 1);
+        var wf = MPWaterFall.New(res.find(".images"), res.find(".image-waterfall"), 3, 76, 1, 1, 1, 1);
 
         $.getJSON("/package/" + imageDetail.package.id + "/?ajax=&simple=", function (data)
         {
@@ -62,7 +62,7 @@ MPWidget.ImageView.New = function (imageDetail)
     {
         var strVar1 = "";
         strVar1 += "<a class=\"image\" href=\"{0}\">".Format("/image/" + image.id);
-        strVar1 += "     <img src=\"{0}\" width=\"78\" height=\"{1}\"/>".Format(imageHost + "/" + image.file.hash + "_fw78", Math.ceil(78 * image.file.height / image.file.width));
+        strVar1 += "     <img src=\"{0}\" width=\"76\" height=\"{1}\"/>".Format(imageHost + "/" + image.file.hash + "_fw78", Math.ceil(76 * image.file.height / image.file.width));
         strVar1 += "     <div class=\"cover\"><\/div>";
         strVar1 += "<\/a>";
 

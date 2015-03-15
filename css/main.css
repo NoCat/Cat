@@ -60,7 +60,7 @@ table {
   height: 40px;
   background-color: #f9f9f9;
   box-shadow: 0 0 4px #b3b3b3;
-  z-index: 900;
+  z-index: 100;
 }
 .header .menu-bar {
   font-size: 15px;
@@ -1137,4 +1137,52 @@ table {
 }
 .widget-image .info .text a:hover {
   text-decoration: underline;
+}
+.widget-window {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+.widget-window .close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: url(/img/close_32_32.png) no-repeat center center;
+}
+.widget-window .close:hover {
+  background-image: url(/img/close_32_32_hover.png);
+}
+.widget-window .prev,
+.widget-window .next {
+  width: 45px;
+  height: 100px;
+  background: no-repeat center center rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  margin-top: -50px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.widget-window .prev:hover,
+.widget-window .next:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.widget-window .prev {
+  left: 0;
+  background-image: url(/img/left_29_50.png);
+}
+.widget-window .next {
+  right: 0;
+  background-image: url(/img/right_29_50.png);
+}
+.widget-window .viewer {
+  display: table;
+  margin: 30px auto;
 }

@@ -28,9 +28,11 @@ public partial class image : MPPage
 
     void Ajax()
     {
-        if(Request.QueryString["ajax"]!=null)
-        {
+        if (Request.QueryString["ajax"] == null)
+            return;
 
-        }
+        Response.Write(JSON.Stringify(JSON.ImageDetail(_image, Session["user"] as MPUser)));
+
+        Response.End();
     }
 }

@@ -1,4 +1,5 @@
-﻿/// <reference path="../Dialog/CreateImageDialog.js" />
+﻿/// <reference path="window.js" />
+/// <reference path="../Dialog/CreateImageDialog.js" />
 /// <reference path="../Format/User.js" />
 /// <reference path="../main.js" />
 /// <reference path="../Dialog/MessageBox.js" />
@@ -19,7 +20,7 @@ MPWidget.Image.New = function (image)
 {
     var fuser = MPFormat.User.New(image.user);
     var strVar = "";
-    strVar += "<div class=\"widget-image\">";
+    strVar += "<div class=\"widget-image\" data-id=\"{0}\">".Format(image.id);
     strVar += "    <div class=\"actions\">";
     strVar += "         <div class=\"left\">";
     strVar += "             <div class=\"repin\" title=\"转存到我的图包\" data-id=\"{0}\" data-hash=\"{1}\" data-description=\"{2}\">转存<\/div>".Format(image.id,image.file.hash,image.description);
@@ -66,7 +67,7 @@ MPWidget.Image.Bind = function (parent)
         //点击取消赞
     .on("click", ".widget-image .unpraise", unpraise_click)
         //点击图像,点击了以后阻止a标签的click,防止页面跳转,并显示图片,这个函数暂时先不实现
-    .on("click", ".widget-image a img", img_click)
+    .on("click", ".widget-image a.img", img_click)
         //鼠标进入,显示action
     .on("mouseenter", ".widget-image", mouse_enter)
         //鼠标离开,隐藏action
@@ -78,9 +79,17 @@ MPWidget.Image.Bind = function (parent)
         location.href = "/image/" + id + "/edit";
     }
 
-    function img_click()
+    function img_click(e)
     {
-        //未实现
+        //防止浏览器跳转
+        e.preventDefault();
+        var viewerWindow = $(".widget_window");
+        if(viewerWindow.length==0)
+        {
+            var viewerWindow = MPWidget.Window.New();
+            $(".widget-frame").append(viewerWindow);            
+        }
+        viewerWindow.Init($(this).parents(".widget-image"));
     }
 
     function repin_click()
