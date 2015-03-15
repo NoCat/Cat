@@ -87,7 +87,12 @@ MPWidget.Image.Bind = function (parent)
         if(viewerWindow.length==0)
         {
             var viewerWindow = MPWidget.Window.New();
-            $(".widget-frame").append(viewerWindow);            
+            var body = $("body");
+            viewerWindow.onClose = function ()
+            {
+                body.removeAttr("style");
+            }
+            $("body").append(viewerWindow).css("overflow","hidden");            
         }
         viewerWindow.Init($(this).parents(".widget-image"));
     }

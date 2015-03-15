@@ -38,6 +38,10 @@ MPWidget.Window.New=function()
     function close_click()
     {
         content.remove();
+        if(content.onClose!=null)
+        {
+            content.onClose();
+        }
     }
 
     content.Init=function(widget_image)
@@ -64,6 +68,8 @@ MPWidget.Window.New=function()
             imageView.Run();
         })
     }
+
+    content.onClose = null;
 
     return content;
 }
