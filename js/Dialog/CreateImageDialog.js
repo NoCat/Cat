@@ -1,10 +1,10 @@
 ﻿/// <reference path="TitleDialog.js" />
 /// <reference path="../jquery.js" />
+/// <reference path="MessageBox.js" />
 /// <reference path="Dialog.js" />
 MPCreateImageDialog =//创建图片
     {
-        New: function (imageSrc,title,description)
-        {
+        New: function (imageSrc, title, description) {
             var strVar = "";
             strVar += "<div class=\"dialog-mask\">";
             strVar += "    <div class=\"dialog-box\">";
@@ -55,7 +55,7 @@ MPCreateImageDialog =//创建图片
             title = title ? title : "";
             description = description ? description : "";
 
-            var dialog = MPTitleDialog.New(strVar.Format(imageSrc,title,description));
+            var dialog = MPTitleDialog.New(strVar.Format(imageSrc, title, description));
             var description = dialog.Content.find(".description textarea");//描述
             var bCurrent = dialog.Content.find(".package-list");//当前图标按钮
             var dropList = dialog.Content.find(".drop-list");//点击后弹出列表
@@ -67,24 +67,26 @@ MPCreateImageDialog =//创建图片
             dialog.packageId = 0;
             dialog.Title(title);
 
-            $.post(host + "/ajax/query-packages", {}, function (data)
-            {
-                if (data.code == 0)
-                {
+            $.post(host + "/ajax/query-packages", {}, function (data) {
+                if (data.code == 0) {
                     var packagelist = data.packages;
                     var length = packagelist.length;
-                    for (var i = 0; i < length; i++)
-                    {
+                    for (var i = 0; i < length; i++) {
                         var option = $("<div/>").addClass("package");
                         option.text(packagelist[i].title);
                         option.attr("data-package-id", packagelist[i].id);
                         select.append(option);
                     }
+                    if (packagelist.length != 0) {
+                        bCurrent.attr("data-package-id", packagelist[0].id);
+                        bCurrent.find(".name").text(packagelist[0].title);
+                    }
                 }
             }, "json");//获取图包
 
-            var dropListHide = function ()
-            {
+
+
+            var dropListHide = function () {
                 filterate.hide();
                 select.show();
                 filterSearch.val("");
@@ -92,8 +94,7 @@ MPCreateImageDialog =//创建图片
 
             MPPopUpMenu(bCurrent, dropList, dropListHide);
 
-            dropList.on("click", ".package", function (e)
-            {
+            dropList.on("click", ".package", function (e) {
                 var a = $(this);
                 bCurrent.attr("data-package-id", a.attr("data-package-id"));
                 bCurrent.find(".name").text(a.text());
@@ -101,78 +102,72 @@ MPCreateImageDialog =//创建图片
                 e.stopPropagation();
             });
 
-            filterate.find(".create").click(function ()
-            {
+            filterate.find(".create").click(function () {
                 var a = $(this);
-                if (a.text == null)
-                {
+                if (a.text == null) {
                     return;
                 }
-                $.post(host + "/ajax/create-package", { title: MPHtmlEncode(filterSearch.val()) }, function (data)
-                {
-                    if (data.code == 0)
-                    {
-                        bCurrent.attr("data-package-id", data.id);
+                $.post(host + "/ajax/create-package", { title: MPHtmlEncode(filterSearch.val()) }, function (data) {
+                    if (data.code == 0) {
+                        bCurrent.attr("data-package-id", data.packageid);
                         bCurrent.find(".name").text(filterSearch.val());
                         dropList.hide();
                     }
-                    else
-                    {
+                    else {
                         MPMessageBox.New("warn", data.msg);
                     }
                 }, "json");
             })
 
-            filterSearch.keyup(function ()
-            {
+            filterSearch.keyup(function () {
                 var val = $.trim(filterSearch.val());
-                if (val == "")
-                {
+                if (val == "") {
                     select.show();
                     filterate.hide();
                     return;
                 }
                 select.hide();
                 filterate.show();
-                
+
                 //清空快速搜素列表
                 filterate.find(".package").remove();
                 //获取当前图包列表
                 var packageList = select.find(".package");
-                if (packageList.length == 0)
-                {
+                if (packageList.length == 0) {
                     filterate.find(".create").text("新建图包---" + val);
                 }
-                else
-                {
-                    packageList.each(function ()
-                    {
-                        if ($(this).text().indexOf(val) != -1)
-                        {
+                else {
+                    packageList.each(function () {
+                        if ($(this).text().indexOf(val) != -1) {
                             //找到了之后就复制一个放入候选列表
                             filterate.append($(this).clone());
                         }
-                        else
-                        {
+                        else {
                             filterate.find(".create").text("新建图包---" + val);
                         }
                     });
                 }
             });
 
-            dialog.ButtonOK.click(function ()
-            {
+            dialog.ButtonOK.click(function () {
                 dialog.description = description.val();
                 dialog.packageId = bCurrent.attr("data-package-id");
-                if (dialog.onOK != null)
-                {
+                if (dialog.packageId == "" || dialog.packageId == undefined) {
+                    MPMessageBox.New(MPMessageBox.Icons.Warn, "请选择一个图包,如果没有图包请新建一个图包!");
+                    return;
+                }
+                if (dialog.onOK != null) {
                     dialog.onOK();
                 }
-                else
-                {
+                else {
                     dialog.Close();
                 }
             })
+
+            dialog.Content.find(".cancel").click(function () {
+                dialog.Close();
+            })//取消按钮
+
             return dialog;
         }
     }
