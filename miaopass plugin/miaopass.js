@@ -28,6 +28,14 @@ function img_mouseenter() {
         button.show();
         source = t.attr("src");
         button.offset({ top: t.offset().top, left: t.offset().left });
+        button.on("mouseleave", function () {
+            var point={};
+            point.X=event.clientX;
+            point.Y=event.clientY;
+            if (!MPCheckInEle(t,point)) {
+                button.hide();
+            }
+        });
         from = location.href;
         checkLive(t);
     }
