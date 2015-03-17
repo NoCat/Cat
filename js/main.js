@@ -298,8 +298,6 @@ var MPWaterFall = {
 
         waterFall.onBottom = null;
 
-
-
         return waterFall;
     }
 }
@@ -401,7 +399,7 @@ function MPMenu(parent, menu, staytime, delaytime)//parent为点击目标 menu�
     })
 }
 
-function MPPopUpMenu(parent, menu)
+function MPPopUpMenu(parent, menu,callback)//parent为点击目标 menu为弹出窗口 callback为menu关闭后响应的事件
 {
     var _parent = $(parent);
     var _menu = $(menu);
@@ -423,6 +421,9 @@ function MPPopUpMenu(parent, menu)
             {
                 _menu.hide();
                 $(window).off("click", clickfn);
+            }
+            if (callback!=undefined||callback!=null) {
+                callback();
             }
         })
     })

@@ -111,6 +111,12 @@ MPCreateImageDialog =//创建图片
                     if (data.code == 0) {
                         bCurrent.attr("data-package-id", data.packageid);
                         bCurrent.find(".name").text(filterSearch.val());
+
+                        var option = $("<div/>").addClass("package");
+                        option.text(filterSearch.val());
+                        option.attr("data-package-id", data.packageid);
+                        select.append(option);//将新的选项添加到select中
+
                         dropList.hide();
                     }
                     else {
