@@ -39,6 +39,7 @@
                     if (data.code == 0)
                     {
                         select.hide();
+                        dialog.HideClose();
                         process.show();
                         callback(data.name);
                     }
@@ -72,7 +73,12 @@
                     }
                     else
                     {
-                        MPMessageBox.New("error", "文件上传失败>_< 请重试");
+                        var box = MPMessageBox.New("error", "文件上传失败>_< 请重试");
+                        box.HideClose();
+                        box.onOK = function () {
+                            box.Close();
+                            dialog.Close();
+                        }
                         return;
                     }
                 }
