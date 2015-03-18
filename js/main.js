@@ -1,9 +1,6 @@
 ﻿/// <reference path="jquery.js" />
 /// <reference path="carhartl-jquery-cookie-92b7715/jquery.cookie.js" />
 
-var host = "http://localhost:2991";
-var imageHost = "http://test-img.miaopass.net";
-
 String.prototype.Format = function (arg1, arg2)
 {
     var args;

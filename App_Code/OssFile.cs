@@ -20,7 +20,30 @@ static public class OssFile
         _ossClient = new OssClient(_ossEndPoint, _ossAccessId, _ossAccessKey);
     }
 
-    public static bool Create(string path, Stream s)
+    public static void ClearBucket()
+    {
+        var list = _ossClient.ListObjects(_ossPublicBucketName);
+        while (true)
+        {
+            List<string> keyList = new List<string>();
+            foreach (var item in list.ObjectSummaries)
+            {                
+                keyList.Add(item.Key);                
+            }
+            _ossClient.DeleteObjects(new DeleteObjectsRequest(_ossPublicBucketName, keyList));
+
+            if(list.NextMarker!=null)
+            {
+                list = _ossClient.ListObjects(new ListObjectsRequest(_ossPublicBucketName) { Marker = list.NextMarker });
+            }
+            else
+            {
+                break;
+            }
+        }        
+    }
+
+    public static void Create(string path, Stream s)
     {
         int count = 0;
         while (count < 5)
@@ -39,11 +62,11 @@ static public class OssFile
 
         if (count < 5)
         {
-            return true;
+            return;
         }
         else
         {
-            return false;
+            throw new MiaopassFileCreateFailedException();
         }
     }
 

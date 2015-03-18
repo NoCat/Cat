@@ -1151,7 +1151,7 @@ table {
 .widget-window .close {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 18px;
   width: 50px;
   height: 50px;
   cursor: pointer;
@@ -1180,7 +1180,7 @@ table {
   background-image: url(/img/left_29_50.png);
 }
 .widget-window .next {
-  right: 0;
+  right: 18px;
   background-image: url(/img/right_29_50.png);
 }
 .widget-window .viewer {

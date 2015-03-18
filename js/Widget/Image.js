@@ -39,7 +39,7 @@ MPWidget.Image.New = function (image)
     }
     strVar += "    <\/div>";
     strVar += "    <a class=\"img\" href=\"{0}\">".Format("/image/"+image.id);
-    strVar += "        <img src=\"{0}\" width=\"236\" height=\"{1}\" />".Format(imageHost + "/" + image.file.hash + "_fw235", Math.ceil(236 * image.file.height / image.file.width));
+    strVar += "        <img src=\"{0}\" width=\"236\" height=\"{1}\" />".Format(imageHost + "/" + image.file.hash + "_fw236", Math.ceil(236 * image.file.height / image.file.width));
     strVar += "        <div class=\"cover\"><\/div>";
     strVar += "    <\/a>";
     strVar += "    <div class=\"description\">{0}<\/div>".Format(this.Description(image.description));
