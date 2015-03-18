@@ -20,11 +20,11 @@ MPWidget.Package.New = function (packageDetail, type)
         {
             if (i == 0)
             {
-                strVar += " <img class=\"cover\" src=\"{0}\" />".Format(imageHost + "/" + packageDetail.thumbs[0].file.hash + "_sq216");
+                strVar += " <img class=\"cover\" src=\"{0}\" />".Format(imageHost + "/" + packageDetail.thumbs[0].file.hash + "_sq236");
             }
             else
             {
-                strVar += " <img class=\"thumb\" src=\"{0}\" />".Format(imageHost + "/" + packageDetail.thumbs[i].file.hash + "_sq70");
+                strVar += " <img class=\"thumb\" src=\"{0}\" />".Format(imageHost + "/" + packageDetail.thumbs[i].file.hash + "_sq75");
             }
         }
         strVar += "        <\/div>";
@@ -35,7 +35,7 @@ MPWidget.Package.New = function (packageDetail, type)
     strVar += "            <div class=\"thumb-border\"><\/div>";
     strVar += "            <div class=\"thumb-border\"><\/div>";
     strVar += "        <\/div>";
-    strVar += "        <div class=\"over empty-package\">";
+    strVar += "        <div class=\"over{0}\">".Format(packageDetail.thumbs.length==0?" empty-package":"");
     strVar += "            <h3>{0}<\/h3>".Format(packageDetail.title);
     strVar += "            <h4>{0}<\/h4>".Format(packageDetail.description);
     strVar += "        <\/div>";

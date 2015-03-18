@@ -82,8 +82,18 @@ public static class JSON
         result.title = package.Title;
         result.description = package.Description;
 
+        var thumbs = new List<object>();
+        {
+            var res = DB.SExecuteReader("select image.id from image left join package on image.id=package.coverid where packageid=? order by coverid desc ,image.id desc limit 4", package.ID);
+            foreach (var item in res)
+            {
+                thumbs.Add(JSON.Image(new MPImage(Convert.ToInt32(item[0]))));
+            }
+        }
+        result.thumbs = thumbs;
+
         var imageCount = DB.SExecuteScalar("select count(*) from image where packageid=?", package.ID);
-        var followerCount = DB.SExecuteScalar("select count(*) from type=? and info=?", MPFollowingTypes.Package, package.ID);
+        var followerCount = DB.SExecuteScalar("select count(*) from following where type=? and info=?", MPFollowingTypes.Package, package.ID);
 
         result.imageCount = Convert.ToInt32(imageCount);
         result.followedCount = Convert.ToInt32(followerCount);

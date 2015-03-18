@@ -152,7 +152,7 @@ public static class Tools
         using (Graphics g = Graphics.FromImage(desc))
         {
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(img, new Rectangle(left, top, s, s), new Rectangle(0, 0, size, size), GraphicsUnit.Pixel);
+            g.DrawImage(img, new Rectangle(0, 0, size, size), new Rectangle(left, top, s, s), GraphicsUnit.Pixel);
         }
         return desc;
     }

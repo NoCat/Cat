@@ -43,5 +43,5 @@ Temporary Items
 .apdisk
 
 # config files
-web.config
+/Web.config
 js/config.js

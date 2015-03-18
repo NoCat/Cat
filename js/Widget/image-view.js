@@ -44,24 +44,24 @@ MPWidget.ImageView.New = function (imageDetail)
     res.Run = function ()
     {
         var wf = MPWaterFall.New(res.find(".images"), res.find(".image-waterfall"), 3, 76, 1, 1, 1, 1);
-
-        $.getJSON("/package/" + imageDetail.package.id + "/?ajax=&simple=", function (data)
+        var max = 0;
+        wf.onBottom = function ()
         {
-            var n = data.length;
-            var list = [];
-            for (var i = 0; i < n; i++)
+            wf.BeginUpdate();
+            $.getJSON("/package/" + imageDetail.package.id, { ajax: true, simple: true, max: max }, function (data)
             {
-                list.push(ImageItem.New(data[i]));
-            }
-            wf.Push(list);
-        })
+                max = wf.Push(data, ImageItem, null, "id");
+                wf.EndUpdate();
+            })
+        };
+        wf.onBottom();
     }
 
     var ImageItem = {};
     ImageItem.New = function (image)
     {
         var strVar1 = "";
-        strVar1 += "<a class=\"image\" href=\"{0}\">".Format("/image/" + image.id);
+        strVar1 += "<a class=\"image\" href=\"{0}\" data-id=\"{1}\">".Format("/image/" + image.id, image.id);
         strVar1 += "     <img src=\"{0}\" width=\"76\" height=\"{1}\"/>".Format(imageHost + "/" + image.file.hash + "_fw78", Math.ceil(76 * image.file.height / image.file.width));
         strVar1 += "     <div class=\"cover\"><\/div>";
         strVar1 += "<\/a>";

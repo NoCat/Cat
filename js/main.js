@@ -10,10 +10,10 @@ String.prototype.Format = function (arg1, arg2)
         args = arguments;
     return this.replace(/(\{\d+\})/g, function (word)
     {
-        return args[parseInt(word.substring(1, word.length - 1))].toString();
+        return MPHtmlEncode(args[parseInt(word.substring(1, word.length - 1))].toString());
     })
 }
-
+MPData = {};
 MPWidget = {};
 MPFormat = {};
 
@@ -209,28 +209,21 @@ var MPWaterFall = {
             return a;
         }
 
-        waterFall.Push = function (newItems)
+        waterFall.Push = function (dataList, type, typeDetail, returnField)
         {
-            var list = [];
-            if (newItems instanceof Array)
+            var n = dataList.length;
+            if (n == 0)
             {
-                var n = newItems.length;
-                for (var i = 0; i < n; i++)
-                {
-                    list.push(Add(newItems[i]));
-                }
+                waterFall.Complete();
+                return 0;
             }
-            else
+            for (var i = 0; i < n; i++)
             {
-                list.push(Add(newItems));
+                var item1 = Add(type.New(dataList[i], typeDetail));
+                Arrange(item1);
+                _list.push(item1);
             }
-            _list = _list.concat(list);
-
-            var n1 = list.length;
-            for (var i = 0; i < n1; i++)
-            {
-                Arrange(list[i]);
-            }
+            return dataList[n - 1][returnField];
         }
 
         waterFall.Insert = function (startIndex, newItems)
@@ -396,7 +389,7 @@ function MPMenu(parent, menu, staytime, delaytime)//parent为点击目标 menu�
     })
 }
 
-function MPPopUpMenu(parent, menu,callback)//parent为点击目标 menu为弹出窗口 callback为menu关闭后响应的事件
+function MPPopUpMenu(parent, menu, callback)//parent为点击目标 menu为弹出窗口 callback为menu关闭后响应的事件
 {
     var _parent = $(parent);
     var _menu = $(menu);
@@ -419,7 +412,8 @@ function MPPopUpMenu(parent, menu,callback)//parent为点击目标 menu为弹出
                 _menu.hide();
                 $(window).off("click", clickfn);
             }
-            if (callback!=undefined||callback!=null) {
+            if (callback != undefined || callback != null)
+            {
                 callback();
             }
         })
