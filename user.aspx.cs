@@ -101,6 +101,15 @@ public partial class user_aspx : MPPage
                     }
                 }
                 break;
+            case "follower":
+                {
+                    var res = DB.SExecuteReader("select userid from following where info=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPFollowingTypes.User, max, limit);
+                    foreach (var item in res)
+                    {
+                        datas.Add(JSON.UserDetail(new MPUser(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                    }
+                }
+                break;
             default:
                 {
                     var res = DB.SExecuteReader("select id from package where userid=? and id<? order by id desc limit 10", pageUser.ID, max);

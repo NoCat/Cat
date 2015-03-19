@@ -170,26 +170,26 @@ table {
 .body {
   margin-top: 60px;
 }
-.page-package-info {
+.widget-packageinfo {
   border-radius: 5px;
   box-shadow: 0 0 5px #b3b3b3;
   background-color: #ffffff;
 }
-.page-package-info .bar1 {
+.widget-packageinfo .bar1 {
   font-size: 14px;
   padding: 15px 25px;
   overflow: hidden;
 }
-.page-package-info .bar1 .title {
+.widget-packageinfo .bar1 .title {
   font-size: 20px;
   margin-top: -5px;
   font-weight: normal;
   float: left;
 }
-.page-package-info .bar1 .action-btns {
+.widget-packageinfo .bar1 .action-btns {
   float: right;
 }
-.page-package-info .bar1 .action-btns .btn {
+.widget-packageinfo .bar1 .action-btns .btn {
   padding: 0 12.5px;
   font-size: 13px;
   line-height: 23px;
@@ -202,42 +202,42 @@ table {
   border: 1px solid #e3e3e3;
   display: inline-block;
 }
-.page-package-info .bar1 .action-btns .btn:hover {
+.widget-packageinfo .bar1 .action-btns .btn:hover {
   background-color: #ebebeb;
 }
-.page-package-info .bar1 .description {
+.widget-packageinfo .bar1 .description {
   width: 70%;
   padding-left: 5px;
   color: #666666;
 }
-.page-package-info .bar2 {
+.widget-packageinfo .bar2 {
   font-size: 15px;
   border-top: 1px solid #e6e6e6;
   background-color: #f9f9f9;
   overflow: hidden;
   height: 50px;
 }
-.page-package-info .bar2 .user {
+.widget-packageinfo .bar2 .user {
   float: left;
   height: 35px;
   margin-top: 7.5px;
   margin-left: 20px;
 }
-.page-package-info .bar2 .user img {
+.widget-packageinfo .bar2 .user img {
   float: left;
   width: 35px;
   height: 35px;
   display: inline-block;
 }
-.page-package-info .bar2 .user .user-name {
+.widget-packageinfo .bar2 .user .user-name {
   float: left;
   line-height: 35px;
 }
-.page-package-info .bar2 .tabs {
+.widget-packageinfo .bar2 .tabs {
   float: right;
   overflow: hidden;
 }
-.page-package-info .bar2 .tabs .tab {
+.widget-packageinfo .bar2 .tabs .tab {
   padding: 0 15px;
   text-align: center;
   line-height: 50px;
