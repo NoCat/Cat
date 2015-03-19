@@ -26,6 +26,37 @@ $(function ()
                 }
             }
             break;
+
+        case "praise":
+            {
+                switch (MPData.sub2) {
+                    case "package":
+                        {
+                            var max = userInfo.waterfall.Push(MPData.datas, MPWidget.Package, null, "id");
+                            userInfo.waterfall.onBottom = function () {
+                                userInfo.waterfall.BeginUpdate();
+                                $.getJSON("", { ajax: true, max: max }, function (data) {
+                                    max = userInfo.waterfall.Push(data, MPWidget.Package, null, "id");
+                                    userInfo.waterfall.EndUpdate();
+                                });
+                            }
+                        }
+                        break;
+                    default:
+                        {
+                            var max = userInfo.waterfall.Push(MPData.datas, MPWidget.Image, null, "id");
+                            userInfo.waterfall.onBottom = function () {
+                                userInfo.waterfall.BeginUpdate();
+                                $.getJSON("", { ajax: true, max: max }, function (data) {
+                                    max = userInfo.waterfall.Push(data, MPWidget.Image, null, "id");
+                                    userInfo.waterfall.EndUpdate();
+                                });
+                            }
+                        }
+                        break;
+                }
+            }
+            break;
         default:
             var max = userInfo.waterfall.Push(MPData.datas, MPWidget.Package, null, "id");
             userInfo.waterfall.onBottom = function ()
