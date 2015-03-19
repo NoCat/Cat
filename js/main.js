@@ -298,12 +298,8 @@ function MPCenter(content, parent)
     var cheight = content.height();
     var cwidth = content.width();
 
-    var wheight = parent.height();
-    var wwidth = parent.width();
-
-    var t = Math.floor(wheight / 2 - cheight / 2);
-    var l = Math.floor(wwidth / 2 - cwidth / 2);
-    content.offset({ top: t, left: l });
+    content.css("margin-left", -Math.floor(cwidth / 2));
+    content.css("margin-top", -Math.floor(cheight / 2));
 }
 
 function MPCheckEmail(e)
