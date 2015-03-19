@@ -29,22 +29,22 @@ public partial class user_aspx : MPPage
         MPData.sub1 = sub1;
         MPData.sub2 = sub2;
 
+        int max = 0;
+        try
+        {
+            max = Tools.GetInt32FromRequest(Request.QueryString["max"]);
+        }
+        catch { }
+
+        if (max == 0)
+        {
+            max = Int32.MaxValue;
+        }
+
         switch(sub1)
         {
             case "image":
                 {
-                    int max = 0;
-                    try
-                    {
-                        max = Tools.GetInt32FromRequest(Request.QueryString["max"]);
-                    }
-                    catch { }
-
-                    if(max==0)
-                    {
-                        max = Int32.MaxValue;
-                    }
-
                     var res = DB.SExecuteReader("select id from image where userid=? and id<? order by id desc limit 10", user.ID,max);
                     var list = new List<object>();
                     foreach (var item in res)
@@ -63,11 +63,18 @@ public partial class user_aspx : MPPage
                 break;
             default:
                 {
-                    var res = DB.SExecuteReader("select id from package where userid=? limit 10", user.ID);
+                    var res = DB.SExecuteReader("select id from package where userid=? and id<? limit 10", user.ID,max);
                     var list = new List<object>();
                     foreach (var item in res)
                     {
                         list.Add(JSON.PackageDetail(new MPPackage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                    }
+
+                    if (Request.QueryString["ajax"] != null)
+                    {
+                        Response.Write(JSON.Stringify(list));
+                        Response.End();
+                        return;
                     }
                     MPData.datas = list;
                 }

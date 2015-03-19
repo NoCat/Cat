@@ -27,7 +27,16 @@ $(function ()
             }
             break;
         default:
-            userInfo.waterfall.Push(MPData.datas, MPWidget.Package);
+            var max = userInfo.waterfall.Push(MPData.datas, MPWidget.Package, null, "id");
+            userInfo.waterfall.onBottom = function ()
+            {
+                userInfo.waterfall.BeginUpdate();
+                $.getJSON("", { ajax: true, max: max }, function (data)
+                {
+                    max = userInfo.waterfall.Push(data, MPWidget.Package, null, "id");
+                    userInfo.waterfall.EndUpdate();
+                });
+            }
             break;
     }
 })

@@ -166,11 +166,11 @@ public static class Tools
             return new Bitmap(img);
 
         int height = (int)(1.0 * width * img.Height / img.Width);
-        Image desc = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+        Image desc = new Bitmap(width, height);
         using (Graphics g = Graphics.FromImage(desc))
         {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(img, new Rectangle(0, 0, desc.Width, desc.Height), new Rectangle(0, 0, img.Width, img.Height), GraphicsUnit.Pixel);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.DrawImage(img, new Rectangle(0, 0, desc.Width, desc.Height), new Rectangle(0,0,img.Width,img.Height), GraphicsUnit.Pixel);
         }
         return desc;
     }

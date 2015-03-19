@@ -407,7 +407,7 @@ table {
   background-color: #ffffff;
   border: 1px solid #b3b3b3;
   border-radius: 5px;
-  position: absolute;
+  position: fixed;
   color: #333333;
 }
 .dialog-box .dialog-title {
