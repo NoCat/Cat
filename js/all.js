@@ -12,7 +12,7 @@ $(function ()
     document.title = "最新图片_喵帕斯";
 
     var n = MPData.images.length;
-    var fall1 = MPWaterFall.New($(window), waterfall, 4, 236, 6, 6, 6, 6);
+    var fall1 = MPWaterFall.New($(window), waterfall, 4, 236, 7, 7, 7, 7);
     var max = fall1.Push(MPData.images, MPWidget.Image,null,"id");
     fall1.onBottom = function ()
     {

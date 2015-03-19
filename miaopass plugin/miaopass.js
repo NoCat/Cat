@@ -1,7 +1,7 @@
 ﻿//在这里开始写就可以了,chrome插件其实也就是一个js程序
 
 //服务器地址
-var host = "http://localhost:2991/";
+var host = "http://localhost:6186/";
 //准备收集的图片的url
 var source = "";
 //当前页面的url
