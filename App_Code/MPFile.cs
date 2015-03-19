@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
-using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 public class MPFile
 {
@@ -60,42 +61,71 @@ public class MPFile
 
         //检查文件是否图像文件
         fileStream.Position = 0;
-        BitmapSource bitmap = null;
-        string fileType = null;
+        Image bitmap = null;
         try
         {
-            bitmap = Tools.LoadBitmap(fileStream, out fileType);
+            bitmap = Image.FromStream(fileStream);
         }
         catch (BadImageFormatException)
         {
             throw new MiaopassInvalidImageFileException();
         }
 
-        //检查图像是否为jpg或者png
-        if (fileType.Contains("image/jpeg") == false && fileType.Contains("image/png") == false)
-        {
+        //检查图像是否为jpg,png,bmp
+        if (bitmap.RawFormat.Equals(ImageFormat.Bmp) == false && bitmap.RawFormat.Equals(ImageFormat.Png) == false && bitmap.RawFormat.Equals(ImageFormat.Jpeg) == false)
             throw new MiaopassInvalidImageFileException();
+
+        //上传原始的(如果格式非jpg,则转换成jpg,如果图片大于800w像素,则压缩小于800w像素)图片
+        int threshold = 8000000;
+        int pixels = bitmap.Width * bitmap.Height;
+
+        if (pixels > threshold)
+        {
+            int w = (int)(bitmap.Width / Math.Sqrt(1.0 * pixels / threshold));
+            using (var t = bitmap.FixWidth(w))
+            {
+                OssFile.Create(md5, t.SaveAsJpeg());
+            }
+        }
+        else
+        {
+            OssFile.Create(md5, bitmap.SaveAsJpeg());
         }
 
-        if (//上传原图
-            OssFile.Create(md5, fileStream) == false ||
-            //上传235定宽
-            OssFile.Create(md5 + "_fw235", bitmap.Thumb(235, 0).SaveAsJpeg()) == false ||
-            //上传235方形
-            OssFile.Create(md5 + "_sq235", bitmap.Crop(235).SaveAsJpeg()) == false ||
-            //上传75方形
-            OssFile.Create(md5 + "_sq75", bitmap.Crop(75).SaveAsJpeg()) == false ||
-            //上传658定宽
-            OssFile.Create(md5 + "_fw658", (bitmap.PixelWidth <= 658 ? bitmap.SaveAsJpeg() : bitmap.Thumb(658, 0).SaveAsJpeg())) == false ||
-            //上传78定宽
-            OssFile.Create(md5 + "_fw78", bitmap.Thumb(78, 0).SaveAsJpeg()) == false)
+
+        //上传236定宽
+        using (var t = bitmap.FixWidth(236))
         {
-            throw new MiaopassFileCreateFailedException();
+            OssFile.Create(md5 + "_fw236", t.SaveAsJpeg());
+        }
+
+        //上传236方形
+        using (var t = bitmap.Square(236))
+        {
+            OssFile.Create(md5 + "_sq236", t.SaveAsJpeg());
+        }
+
+        //上传75方形
+        using (var t = bitmap.Square(75))
+        {
+            OssFile.Create(md5 + "_sq75", t.SaveAsJpeg());
+        }
+
+        //上传658定宽
+        using (var t = bitmap.FixWidth(658))
+        {
+            OssFile.Create(md5 + "_fw658", t.SaveAsJpeg());
+        }
+
+        //上传78定宽
+        using (var t = bitmap.FixWidth(78))
+        {
+            OssFile.Create(md5 + "_fw78", t.SaveAsJpeg());
         }
 
         try
         {
-            return DB.SInsert("insert into file (width,height,md5) values (?,?,?)", bitmap.PixelWidth, bitmap.PixelHeight, md5);
+            return DB.SInsert("insert into file (width,height,md5) values (?,?,?)", bitmap.Width, bitmap.Height, md5);
         }
         catch (MySql.Data.MySqlClient.MySqlException)
         {

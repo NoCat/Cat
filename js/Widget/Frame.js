@@ -73,7 +73,7 @@ MPWidget.Frame.New = function ()
 
     var s = MPWidget.Search.New();
     search.append(MPWidget.Search.New());
- 
+
     if (MPData.user.id == 0)
     {
         var login = content.find("#login");
@@ -104,12 +104,12 @@ MPWidget.Frame.New = function ()
             var dialog = MPUploadDialog.New();
             dialog.onSuccess = function ()
             {
-                var c = MPCreateImageDialog.New(imageHost+"/"+dialog.hash+"_fw235","上传图片",dialog.filename);
+                var c = MPCreateImageDialog.New(imageHost + "/" + dialog.hash + "_fw236", "上传图片", dialog.filename);
                 c.onOK = function ()
                 {
-                    $.post(host + "/ajax/create-image", { package_id: c.packageId, file_hash: dialog.hash, description: c.description }, function (msg)
+                    $.post(host + "/ajax/create-image", { package_id: c.packageId, file_hash: dialog.hash, description: MPHtmlEncode(c.description) }, function (msg)
                     {
-                        if(msg.code==0)
+                        if (msg.code == 0)
                         {
                             MPMessageBox.New(MPMessageBox.Icons.OK, "上传图片成功");
                             c.Close();

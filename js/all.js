@@ -9,12 +9,18 @@ $(function ()
     frame.Body.append(waterfall);
     $("body").append(frame);
 
-    var fall1 = MPWaterFall.New($(window), waterfall, 4, 236, 6, 6, 6, 6);
-    var list = [];
+    document.title = "最新图片_喵帕斯";
+
     var n = MPData.images.length;
-    for (var i = 0; i < n; i++)
+    var fall1 = MPWaterFall.New($(window), waterfall, 4, 236, 6, 6, 6, 6);
+    var max = fall1.Push(MPData.images, MPWidget.Image,null,"id");
+    fall1.onBottom = function ()
     {
-        list.push(MPWidget.Image.New(MPData.images[i]));
+        fall1.BeginUpdate();
+        $.getJSON("", { ajax: true, max: max }, function (data)
+        {
+            max = fall1.Push(data, MPWidget.Image, null, "id");
+            fall1.EndUpdate();
+        });
     }
-    fall1.Push(list);
 })

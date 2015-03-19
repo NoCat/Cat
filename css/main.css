@@ -407,7 +407,7 @@ table {
   background-color: #ffffff;
   border: 1px solid #b3b3b3;
   border-radius: 5px;
-  position: absolute;
+  position: fixed;
   color: #333333;
 }
 .dialog-box .dialog-title {
@@ -785,6 +785,7 @@ table {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 3px 0 #666666;
+  position: absolute;
 }
 .widget-package .previews {
   display: block;
@@ -1151,7 +1152,7 @@ table {
 .widget-window .close {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 18px;
   width: 50px;
   height: 50px;
   cursor: pointer;
@@ -1180,7 +1181,7 @@ table {
   background-image: url(/img/left_29_50.png);
 }
 .widget-window .next {
-  right: 0;
+  right: 18px;
   background-image: url(/img/right_29_50.png);
 }
 .widget-window .viewer {

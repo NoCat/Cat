@@ -2,28 +2,43 @@
 /// <reference path="image-view.js" />
 
 MPWidget.Window = {};
-MPWidget.Window.New=function()
+MPWidget.Window.New=function(element)
 {
-    var strVar = "";
-    strVar += "<div class=\"widget-window\">";
-    strVar += "     <div class=\"container\">";
-    strVar += "         <div class=\"close\"><\/div>";
-    strVar += "         <div class=\"prev\"><\/div>";
-    strVar += "         <div class=\"next\"><\/div>";
-    strVar += "         <div class=\"viewer\"><\/div>";
-    strVar += "      </div>";
-    strVar += "<\/div>";
+    var content = null;
+    if (element != undefined)
+        content = $(element);
+    else
+    {
+        var strVar = "";
+        strVar += "<div class=\"widget-window\">";
+        strVar += "     <div class=\"container\">";
+        strVar += "         <div class=\"close\"><\/div>";
+        strVar += "         <div class=\"prev\"><\/div>";
+        strVar += "         <div class=\"next\"><\/div>";
+        strVar += "         <div class=\"viewer\"><\/div>";
+        strVar += "      </div>";
+        strVar += "<\/div>";
+        content = $(strVar);
 
-    var content = $(strVar);    
-    var next = content.find(".next");
-    var prev = content.find(".prev");
-    var close = content.find(".close");
-    var viewer = content.find(".viewer");
-    var current = null;
+        var next = content.find(".next");
+        var prev = content.find(".prev");
+        var close = content.find(".close");
+        var viewer = content.find(".viewer");
+        var current = null;
 
-    next.click(next_click);
-    prev.click(prev_click);
-    close.click(close_click);
+        next.click(next_click);
+        prev.click(prev_click);
+        close.click(close_click);
+        content.on("click", ".image-waterfall .image", image_click);
+    }
+
+    function image_click(e)
+    {
+        //防止浏览器跳转
+        e.preventDefault();
+        var id = $(this).attr("data-id");
+        Show(id);
+    }
 
     function next_click()
     { 
@@ -44,6 +59,17 @@ MPWidget.Window.New=function()
         }
     }
 
+    function Show(id)
+    {
+        $.getJSON("/image/" + id + "?ajax=", function (data)
+        {
+            viewer.empty();
+            var imageView = MPWidget.ImageView.New(data);
+            viewer.append(imageView);
+            imageView.Run();
+        })
+    }
+
     content.Init=function(widget_image)
     {
         current = widget_image;
@@ -60,13 +86,7 @@ MPWidget.Window.New=function()
         
         var id = widget_image.attr("data-id");
 
-        $.getJSON("/image/" + id + "?ajax=", function (data)
-        {
-            viewer.empty();
-            var imageView = MPWidget.ImageView.New(data);
-            viewer.append(imageView);
-            imageView.Run();
-        })
+        Show(id);
     }
 
     content.onClose = null;

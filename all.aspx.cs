@@ -29,7 +29,7 @@ public partial class all_aspx : MPPage
         }
     }
 
-    List<object> GetData(int max=0, int limit = 30)
+    List<object> GetData(int max=0, int limit = 10)
     {
         MPUser user = Session["user"] as MPUser;
         if (max == 0)

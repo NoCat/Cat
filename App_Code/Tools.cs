@@ -6,10 +6,9 @@ using System.Text;
 using System.Collections.Specialized;
 using System.IO;
 using System.Security.Cryptography;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System.Windows;
 using System.Configuration;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 public static class Tools
 {
@@ -129,100 +128,84 @@ public static class Tools
         }
     }
 
-    //扩展bitmap
-    public static BitmapSource Thumb(this BitmapSource source, int width, int height)
+    //扩展Image
+    /// <summary>
+    /// 截取方形图像
+    /// </summary>
+    public static Image Square(this Image img,int size)
     {
-        double scaleX = 1.0 * width / source.PixelWidth;
-        double scaleY = 1.0 * height / source.PixelHeight;
-        if (width == 0)
+        int top, left, s;
+        if(img.Width>img.Height)
         {
-            scaleX = scaleY;
-        }
-        if (height == 0)
-        {
-            scaleY = scaleX;
-        }
-
-        ScaleTransform s = new ScaleTransform(scaleX, scaleY);
-
-        TransformedBitmap tb = new TransformedBitmap(source, s);
-        return tb;
-    }
-
-    public static Stream SaveAsJpeg(this BitmapSource source, int qualityLevel = 92)
-    {
-        MemoryStream s = new MemoryStream();
-        source.SaveAsJpeg(s);
-        return s;
-    }
-
-    public static void SaveAsJpeg(this BitmapSource source, Stream s, int qualityLevel = 92)
-    {
-        //var frame = BitmapFrame.Create(source);            
-        DrawingVisual draw = new DrawingVisual();
-        var dc = draw.RenderOpen();
-        Rect rect = new Rect(0, 0, source.Width, source.Height);
-        dc.DrawRectangle(Brushes.White, null, rect);
-        dc.DrawImage(source, rect);
-        dc.Close();
-
-        RenderTargetBitmap target = new RenderTargetBitmap(source.PixelWidth, source.PixelHeight, source.DpiX, source.DpiY, PixelFormats.Pbgra32);
-        target.Render(draw);
-
-        JpegBitmapEncoder encoder = new JpegBitmapEncoder() { QualityLevel = qualityLevel };
-        encoder.Frames.Add(BitmapFrame.Create(target));
-        encoder.Save(s);
-    }
-
-    public static BitmapSource Crop(this BitmapSource source, int left, int top, int width, int height)
-    {
-        return new CroppedBitmap(source, new Int32Rect(left, top, width, height));
-    }
-
-    public static BitmapSource Crop(this BitmapSource source, int size)
-    {
-        BitmapSource resize = null;
-        if (source.PixelWidth > source.PixelHeight)
-        {
-            resize = source.Thumb(0, size);
-        }
-        else
-        {
-            resize = source.Thumb(size, 0);
-        }
-
-        int left = 0;
-        int top = 0;
-        int width = 0;
-        int height = 0;
-
-        if (resize.PixelWidth > resize.PixelHeight)
-        {
+            s = img.Height;
             top = 0;
-            width = resize.PixelHeight;
-            height = resize.PixelHeight;
-            left = (resize.PixelWidth - resize.PixelHeight) / 2;
+            left = (img.Width - img.Height) / 2;
         }
         else
         {
+            s = img.Width;
             left = 0;
-            width = resize.PixelWidth;
-            height = resize.PixelWidth;
-            top = (resize.PixelHeight - resize.PixelWidth) / 2;
+            top = (img.Height - img.Width) / 2;
         }
-        return new CroppedBitmap(resize, new Int32Rect(left, top, width, height));
-    }
-    public static BitmapSource LoadBitmap(Stream stream, out string type)
-    {
-        stream.Position = 0;
-        var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-        type = decoder.CodecInfo.MimeTypes;
-        return decoder.Frames[0];
+
+        Image desc = new Bitmap(size, size);
+        using (Graphics g = Graphics.FromImage(desc))
+        {
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(img, new Rectangle(0, 0, size, size), new Rectangle(left, top, s, s), GraphicsUnit.Pixel);
+        }
+        return desc;
     }
 
-    public static BitmapSource LoadBitmap(Stream stream)
+    /// <summary>
+    /// 高质量缩小图像尺寸,保证缩小后不模糊
+    /// </summary>
+    public static Image FixWidth(this Image img, int width)
     {
-        string type = "";
-        return LoadBitmap(stream, out type);
+        if (width >= img.Width)
+            return new Bitmap(img);
+
+        int height = (int)(1.0 * width * img.Height / img.Width);
+        Image desc = new Bitmap(width, height);
+        using (Graphics g = Graphics.FromImage(desc))
+        {
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.DrawImage(img, new Rectangle(0, 0, desc.Width, desc.Height), new Rectangle(0,0,img.Width,img.Height), GraphicsUnit.Pixel);
+        }
+        return desc;
+    }
+
+    public static Stream SaveAsJpeg(this Image img, int quality = 90)
+    {
+        MemoryStream ms = new MemoryStream();
+        ImageCodecInfo myImageCodecInfo;
+        System.Drawing.Imaging.Encoder myEncoder;
+        EncoderParameter myEncoderParameter;
+        EncoderParameters myEncoderParameters;
+
+        myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+        myEncoder = System.Drawing.Imaging.Encoder.Quality;
+        myEncoderParameters = new EncoderParameters(1);
+
+        myEncoderParameter = new EncoderParameter(myEncoder, quality);
+        myEncoderParameters.Param[0] = myEncoderParameter;
+
+        img.Save(ms, myImageCodecInfo, myEncoderParameters);
+
+        return ms;
+    }
+
+    private static ImageCodecInfo GetEncoderInfo(String mimeType)
+    {
+        int j;
+        ImageCodecInfo[] encoders;
+        encoders = ImageCodecInfo.GetImageEncoders();
+        for (j = 0; j < encoders.Length; ++j)
+        {
+            if (encoders[j].MimeType == mimeType)
+                return encoders[j];
+        }
+        return null;
     }
 }

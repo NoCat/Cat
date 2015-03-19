@@ -477,7 +477,7 @@ table {
     background-color: @baseWhite;
     border: @outerBorder;
     border-radius: 5px;
-    position: absolute;
+    position: fixed;
     color: darken(@baseGrey,20%);
 
     .dialog-title {
@@ -837,6 +837,7 @@ table {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 3px 0 @baseGrey;
+    position:absolute;
 
     .previews {
         display: block;
@@ -1209,10 +1210,11 @@ table {
     background-color: rgba(255,255,255,0.85);
     overflow-y:scroll;
 
+    @marginRight:18px;
     .close{
         position:fixed;
         top:0;
-        right:0;
+        right:@marginRight;
         width:50px;
         height:50px;
         cursor:pointer;
@@ -1244,7 +1246,7 @@ table {
     }
 
     .next{
-        right:0;
+        right:@marginRight;
         background-image:url(/img/right_29_50.png);
     }
 

@@ -44,13 +44,13 @@ MPWidget.UserInfo.New = function ()
         strVar += "            <\/div>";
         strVar += "        <\/div>        ";
     }
+    strVar += "<div class=\"waterfall\"></div>"
     strVar += "    <\/div>";
-    try{
-            return $(strVar);
-    }
-    catch(e)
-    {
-        alert(e.message);
-    }
+ 
+
+    var content = $(strVar);
+    content.waterfall = MPWaterFall.New($(window), content.find(".waterfall"), 4, 236, 6, 6, 6, 6);
+
+    return content;
     
 }
