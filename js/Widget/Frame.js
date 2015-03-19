@@ -8,6 +8,8 @@
 /// <reference path="../jquery.js" />
 /// <reference path="../main.js" />
 /// <reference path="../Format/User.js" />
+/// <reference path="../jquery.cookie.js" />
+
 MPWidget.Frame = {};
 MPWidget.Frame.New = function ()
 {
@@ -96,7 +98,21 @@ MPWidget.Frame.New = function ()
     {
         var p = content.find(".user-nav");
         var m = p.find(".hide-menu");
+        var l = content.find("#logout");//登出
         MPMenu(p, m);
+
+        l.click(function () {
+            if ($.cookie("login")==null) {
+                MPMessageBox.New(MPMessageBox.Icons.Error, "请先登录");
+                return;
+            }
+            $.post(host + "/ajax/logout", {}, function (data) {
+                if (data.code==0) {
+                    $.cookie("login", null);
+                    location.reload();
+                }
+            }, "json");
+        });
 
         var add = content.find(".add-nav");
         add.click(function ()
