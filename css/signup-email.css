@@ -193,6 +193,7 @@ table {
   padding: 0 12.5px;
   font-size: 13px;
   line-height: 23px;
+  height: 23px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -277,6 +278,7 @@ table {
   padding: 0 14px;
   font-size: 14px;
   line-height: 26px;
+  height: 26px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -291,6 +293,7 @@ table {
   padding: 0 14px;
   font-size: 14px;
   line-height: 26px;
+  height: 26px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -305,6 +308,7 @@ table {
   padding: 0 14px;
   font-size: 14px;
   line-height: 26px;
+  height: 26px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -409,6 +413,8 @@ table {
   border-radius: 5px;
   position: fixed;
   color: #333333;
+  left: 50%;
+  top: 50%;
 }
 .dialog-box .dialog-title {
   height: 40px;
@@ -468,6 +474,7 @@ table {
   padding: 0 12px;
   font-size: 12px;
   line-height: 22px;
+  height: 22px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -482,6 +489,7 @@ table {
   padding: 0 12px;
   font-size: 12px;
   line-height: 22px;
+  height: 22px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -499,6 +507,7 @@ table {
   padding: 0 15px;
   font-size: 15px;
   line-height: 28px;
+  height: 28px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -539,6 +548,7 @@ table {
   padding: 0 15px;
   font-size: 15px;
   line-height: 28px;
+  height: 28px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -594,6 +604,7 @@ table {
 .dialog-box .upload-dialog .select .button {
   padding: 0 15px;
   line-height: 28px;
+  height: 28px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -755,6 +766,7 @@ table {
   padding: 0 14px;
   font-size: 14px;
   line-height: 26px;
+  height: 26px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -769,6 +781,7 @@ table {
   padding: 0 14px;
   font-size: 14px;
   line-height: 26px;
+  height: 26px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -878,6 +891,7 @@ table {
   padding: 0 13px;
   font-size: 13px;
   line-height: 24px;
+  height: 24px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -896,6 +910,7 @@ table {
   padding: 0 13px;
   font-size: 13px;
   line-height: 24px;
+  height: 24px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -1052,6 +1067,7 @@ table {
   padding: 0 13px;
   font-size: 13px;
   line-height: 24px;
+  height: 24px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -1066,6 +1082,7 @@ table {
   padding: 0 13px;
   font-size: 13px;
   line-height: 24px;
+  height: 24px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -1080,6 +1097,7 @@ table {
   padding: 0 13px;
   font-size: 13px;
   line-height: 24px;
+  height: 24px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
@@ -1188,6 +1206,66 @@ table {
   display: table;
   margin: 30px auto;
 }
+.widget-user {
+  background-color: #ffffff;
+  box-shadow: 0 0 3px 0 #666666;
+  position: absolute;
+  width: 236px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.widget-user .avt {
+  border: 5px solid white;
+  border-radius: 100px;
+  box-shadow: 0 0 2px 0 #999;
+  display: block;
+  height: 140px;
+  margin: 25px auto 10px;
+  overflow: hidden;
+  width: 140px;
+}
+.widget-user .avt img {
+  width: 140px;
+  height: 140px;
+}
+.widget-user .name {
+  color: #333;
+  display: block;
+  font-size: 15px;
+  text-align: center;
+}
+.widget-user .counts {
+  border-top: 1px solid #ccc;
+  margin: 20px 10px 0 10px;
+  padding: 6px 0;
+  text-align: center;
+}
+.widget-user .counts .item {
+  color: #333;
+  font-size: 14px;
+}
+.widget-user .actions {
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 28px;
+  height: 28px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #333333;
+  background-color: #f7f7f7;
+  border: 1px solid #e3e3e3;
+  margin: 0 10px 10px;
+}
+.widget-user .actions:hover {
+  background-color: #ebebeb;
+}
+.widget-user .actions.follow::after {
+  content: "关注";
+}
+.widget-user .actions.unfollow::after {
+  content: "已关注";
+}
 .form {
   font-size: 14px;
   border: 1px solid #cccccc;
@@ -1219,6 +1297,7 @@ table {
   padding: 0 17.5px;
   font-size: 18px;
   line-height: 33px;
+  height: 33px;
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
