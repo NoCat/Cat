@@ -13,6 +13,7 @@ public partial class all_aspx : MPPage
     {
         Ajax();
         MPData.images = GetData();
+        Title = "";
     }
 
     void Ajax()

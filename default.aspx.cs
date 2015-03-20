@@ -9,13 +9,6 @@ public partial class _default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["user"] == null)
-        {
-            Server.Transfer("all.aspx");
-        }
-        else
-        {
-            Server.Transfer("following.aspx");
-        }
+        Server.Transfer("all.aspx");
     }
 }

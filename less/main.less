@@ -7,6 +7,7 @@
     padding: 0 @height/2;
     font-size: @font-size;
     line-height: @height+(-2);
+    height: @height+(-2);
     text-align: center;
     cursor: pointer;
     border-radius: 3px;
@@ -217,7 +218,7 @@ table {
     margin-top: @headerHeight+20px;
 }
 
-.page-package-info {
+.widget-packageinfo {
     border-radius: 5px;
     box-shadow: 0 0 5px lighten(@baseGrey,30%);
     background-color: @baseWhite;
@@ -479,6 +480,8 @@ table {
     border-radius: 5px;
     position: fixed;
     color: darken(@baseGrey,20%);
+    left: 50%;
+    top: 50%;
 
     .dialog-title {
         @titleHeight: 40px;
@@ -837,7 +840,7 @@ table {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 3px 0 @baseGrey;
-    position:absolute;
+    position: absolute;
 
     .previews {
         display: block;
@@ -1099,8 +1102,8 @@ table {
 .widget-image {
     width: 236px;
     background: @baseWhite;
-    box-shadow: 0 0 3px lighten(@baseGrey,0%);
-    border-radius: 5px;
+    box-shadow: 0 0 5px #333;
+    border-radius: 15px;
     overflow: hidden;
     font-size: 13px;
     position: absolute;
@@ -1208,50 +1211,110 @@ table {
     right: 0;
     bottom: 0;
     background-color: rgba(255,255,255,0.85);
-    overflow-y:scroll;
+    overflow-y: scroll;
 
-    @marginRight:18px;
-    .close{
-        position:fixed;
-        top:0;
-        right:@marginRight;
-        width:50px;
-        height:50px;
-        cursor:pointer;
-        background:url(/img/close_32_32.png) no-repeat  center  center;       
+    @marginRight: 18px;
 
-        &:hover{
-            background-image:url(/img/close_32_32_hover.png);
+    .close {
+        position: fixed;
+        top: 0;
+        right: @marginRight;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        background: url(/img/close_32_32.png) no-repeat center center;
+
+        &:hover {
+            background-image: url(/img/close_32_32_hover.png);
         }
     }
 
-    .prev,.next{
-        width:45px;
-        height:100px;
-        background:no-repeat center center rgba(0,0,0,0.3);
-        position:fixed;
-        top:50%;
-        margin-top:-50px;   
-        border-radius:3px;    
-        cursor:pointer; 
+    .prev, .next {
+        width: 45px;
+        height: 100px;
+        background: no-repeat center center rgba(0,0,0,0.3);
+        position: fixed;
+        top: 50%;
+        margin-top: -50px;
+        border-radius: 3px;
+        cursor: pointer;
 
-        &:hover{
-            background-color:rgba(0,0,0,0.5);
+        &:hover {
+            background-color: rgba(0,0,0,0.5);
         }
     }
 
-    .prev{
-        left:0;
-        background-image:url(/img/left_29_50.png);
+    .prev {
+        left: 0;
+        background-image: url(/img/left_29_50.png);
     }
 
-    .next{
-        right:@marginRight;
-        background-image:url(/img/right_29_50.png);
+    .next {
+        right: @marginRight;
+        background-image: url(/img/right_29_50.png);
     }
 
-    .viewer{
-        display:table;
-        margin:30px auto;
+    .viewer {
+        display: table;
+        margin: 30px auto;
+    }
+}
+
+.widget-user {
+    background-color: @baseWhite;
+    box-shadow: 0 0 3px 0 @baseGrey;
+    position: absolute;
+    width: 236px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    .avt {
+        @avtSize: 140px;
+        border: 5px solid white;
+        border-radius: 100px;
+        box-shadow: 0 0 2px 0 #999;
+        display: block;
+        height: @avtSize;
+        margin: 25px auto 10px;
+        overflow: hidden;
+        width: @avtSize;
+
+        img {
+            width: @avtSize;
+            height: @avtSize;
+        }
+    }
+
+    .name {
+        color: #333;
+        display: block;
+        font-size: 15px;
+        text-align: center;
+    }
+
+
+    .counts {
+        border-top: 1px solid #ccc;
+        margin: 20px 10px 0 10px;
+        padding: 6px 0;
+        text-align: center;
+
+        .item {
+            color: #333;
+            font-size: 14px;
+        }
+    }
+
+    .actions {
+        .btnwhite(30px);
+        margin: 0 10px 10px;
+
+        &.follow::after {
+            content: "关注";
+        }
+
+        &.unfollow::after{
+            content:"已关注";
+        }
     }
 }

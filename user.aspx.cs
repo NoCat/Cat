@@ -14,20 +14,16 @@ public partial class user_aspx : MPPage
 
         int id = Convert.ToInt32(RouteData.Values["id"]);
 
-        MPUser user = null;
+        MPUser pageUser = null;
         try
         {
-            user = new MPUser(id);
+            pageUser = new MPUser(id);
         }
         catch (MiaopassException)
         {
             Response.StatusCode = 404;
             Response.End();
         }
-
-        MPData.page_user = JSON.UserDetail(user, Session["user"] as MPUser);
-        MPData.sub1 = sub1;
-        MPData.sub2 = sub2;
 
         int max = 0;
         try
@@ -41,45 +37,101 @@ public partial class user_aspx : MPPage
             max = Int32.MaxValue;
         }
 
-        switch(sub1)
+        int limit = 10;
+        var datas = new List<object>();
+
+        switch (sub1)
         {
             case "image":
                 {
-                    var res = DB.SExecuteReader("select id from image where userid=? and id<? order by id desc limit 10", user.ID,max);
-                    var list = new List<object>();
+                    var res = DB.SExecuteReader("select id from image where userid=? and id<? order by id desc limit ?", pageUser.ID, max, limit);
                     foreach (var item in res)
                     {
-                        list.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                        datas.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
                     }
-
-                    if(Request.QueryString["ajax"]!=null)
+                }
+                break;
+            case "praise":
+                {
+                    switch (sub2)
                     {
-                        Response.Write(JSON.Stringify(list));
-                        Response.End();
-                        return;
+                        case "package":
+                            {
+                                var res = DB.SExecuteReader("select info from praise where userid=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPPraiseTypes.Package, max, limit);
+                                foreach (var item in res)
+                                {
+                                    datas.Add(JSON.PackageDetail(new MPPackage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                                }
+                            }
+                            break;
+                        default:
+                            {
+                                var res = DB.SExecuteReader("select info from praise where userid=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPPraiseTypes.Image, max, limit);
+                                foreach (var item in res)
+                                {
+                                    datas.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                                }
+                            }
+                            break;
                     }
-                    MPData.datas = list;
+                }
+                break;
+            case "following":
+                {
+                    switch (sub2)
+                    {
+                        case "package":
+                            {
+                                var res = DB.SExecuteReader("select info from following where userid=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPFollowingTypes.Package, max, limit);
+                                foreach (var item in res)
+                                {
+                                    datas.Add(JSON.PackageDetail(new MPPackage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                                }
+                            }
+                            break;
+                        default:
+                            {
+                                var res = DB.SExecuteReader("select info from following where userid=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPFollowingTypes.User, max, limit);
+                                foreach (var item in res)
+                                {
+                                    datas.Add(JSON.UserDetail(new MPUser(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                                }
+                            }
+                            break;
+                    }
+                }
+                break;
+            case "follower":
+                {
+                    var res = DB.SExecuteReader("select userid from following where info=? and type=? and id<? order by id desc limit ?", pageUser.ID, MPFollowingTypes.User, max, limit);
+                    foreach (var item in res)
+                    {
+                        datas.Add(JSON.UserDetail(new MPUser(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                    }
                 }
                 break;
             default:
                 {
-                    var res = DB.SExecuteReader("select id from package where userid=? and id<? limit 10", user.ID,max);
-                    var list = new List<object>();
+                    var res = DB.SExecuteReader("select id from package where userid=? and id<? order by id desc limit 10", pageUser.ID, max);
                     foreach (var item in res)
                     {
-                        list.Add(JSON.PackageDetail(new MPPackage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
+                        datas.Add(JSON.PackageDetail(new MPPackage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
                     }
-
-                    if (Request.QueryString["ajax"] != null)
-                    {
-                        Response.Write(JSON.Stringify(list));
-                        Response.End();
-                        return;
-                    }
-                    MPData.datas = list;
                 }
                 break;
-        }       
+        }
+
+        if (Request.QueryString["ajax"] != null)
+        {
+            Response.Write(JSON.Stringify(datas));
+            Response.End();
+            return;
+        }
+
+        MPData.page_user = JSON.UserDetail(pageUser, Session["user"] as MPUser);
+        MPData.sub1 = sub1;
+        MPData.sub2 = sub2;
+        MPData.datas = datas;
     }
 
 }
