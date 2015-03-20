@@ -11,17 +11,17 @@ $(function () {
 
     switch (MPData.sub1) {
         case "image":
-            waterfallPush(userInfo, MPWidget.Image);
+            waterfallPush(userInfo, MPWidget.Image,null,"id");
             break;
 
         case "praise":
             {
                 switch (MPData.sub2) {
                     case "package":
-                        waterfallPush(userInfo, MPWidget.Package);
+                        waterfallPush(userInfo, MPWidget.Package,null,"id");
                         break;
                     default:
-                        waterfallPush(userInfo, MPWidget.Image);
+                        waterfallPush(userInfo, MPWidget.Image,null,"id");
                         break;
                 }
             }
@@ -31,30 +31,30 @@ $(function () {
             {
                 switch (MPData.sub2) {
                     case "package":
-                        waterfallPush(userInfo, MPWidget.Package);
+                        waterfallPush(userInfo, MPWidget.Package,null,"id");
                         break;
                     default:
-                        waterfallPush(userInfo, MPWidget.User);
+                        waterfallPush(userInfo, MPWidget.User,null,"id");
                         break;
                 }
             }
             break;
 
         case "follower":
-            waterfallPush(userInfo, MPWidget.User);
+            waterfallPush(userInfo, MPWidget.User,null,"id");
             break;
 
         default:
-            waterfallPush(userInfo, MPWidget.Package);
+            waterfallPush(userInfo, MPWidget.Package,null,"id");
             break;
     }
 
-    function waterfallPush(userinfo, instance) {
-        var max = userinfo.waterfall.Push(MPData.datas, instance, null, "id");
+    function waterfallPush(userinfo, type, typeDetail, returnField) {
+        var max = userinfo.waterfall.Push(MPData.datas, type, typeDetail, returnField);
         userinfo.waterfall.onBottom = function () {
             userinfo.waterfall.BeginUpdate();
             $.getJSON("", { ajax: true, max: max }, function (data) {
-                max = userinfo.waterfall.Push(data, instance, null, "id");
+                max = userinfo.waterfall.Push(data, type, typeDetail, returnField);
                 userinfo.waterfall.EndUpdate();
             });
         }
