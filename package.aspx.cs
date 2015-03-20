@@ -5,15 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class package : MPPage
+public partial class package_aspx : MPPage
 {
-    MPPackage _package = null;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        MPPackage package = null;
         try
         {
             int packageid = Tools.GetInt32FromRequest(RouteData.Values["id"] as string);
-            _package = new MPPackage(packageid);
+            package = new MPPackage(packageid);
         }
         catch
         {
@@ -21,53 +22,36 @@ public partial class package : MPPage
             Response.End();
         }
 
-        Ajax();
-        GetData();
-    }
-
-    void Ajax()
-    {
-        if (Request.QueryString["ajax"]==null)
-            return;
-
+        int limit = 10;
         int max = Convert.ToInt32(Request.QueryString["max"]);
-        Response.Write(JSON.Stringify(GetData(max)));
-        Response.End();
-    }
-
-    List<object> GetData(int max = 0, int limit = 30)
-    {
-        bool isSimple = false;
         if (max == 0)
-            max = int.MaxValue;
-        if (Request.QueryString["simple"] != null)
-            isSimple = true;
-        var res = DB.SExecuteReader("select id from image where id<? and packageid=? order by id desc limit ?", max, _package.ID, limit);
-        List<object> dataList = new List<object>();
+            max = Int32.MaxValue;
 
-        if (isSimple == true)
+        var list = new List<object>();
+        var res = DB.SExecuteReader("select id from image where id<? and packageid=? order by id desc limit ?", max, package.ID, limit);
+        if (Request.QueryString["simple"] != null && Request.QueryString["ajax"] != null)
         {
-            try
+            foreach (var item in res)
             {
-                foreach (var item in res)
-                {
-                    dataList.Add(JSON.Image(new MPImage(Convert.ToInt32(item[0]))));
-                }
+                list.Add(JSON.Image(new MPImage(Convert.ToInt32(item[0]))));
             }
-            catch { }
         }
         else
         {
-            MPUser user = Session["user"] as MPUser;
             foreach (var item in res)
             {
-                try
-                {
-                    dataList.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), user));
-                }
-                catch { }
+                list.Add(JSON.ImageDetail(new MPImage(Convert.ToInt32(item[0])), Session["user"] as MPUser));
             }
         }
-        return dataList;
+
+        if(Request.QueryString["ajax"]!=null)
+        {
+            Response.Write(JSON.Stringify(list));
+            Response.End();
+            return;
+        }
+
+        MPData.package = JSON.PackageDetail(package, Session["user"] as MPUser);
+        MPData.images = list;
     }
 }
