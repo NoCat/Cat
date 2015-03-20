@@ -11,6 +11,19 @@ String.prototype.Format = function (arg1, arg2)
     return this.replace(/(\{\d+\})/g, function (word)
     {
         return MPHtmlEncode(args[parseInt(word.substring(1, word.length - 1))].toString());
+    })    
+}
+String.prototype.FormatNoEncode=function(arg1,arg2)
+{
+    
+    var args;
+    if (arguments[0] instanceof Array)
+        args = arguments[0];
+    else
+        args = arguments;
+    return this.replace(/(\{\d+\})/g, function (word)
+    {
+        return args[parseInt(word.substring(1, word.length - 1))].toString();
     })
 }
 MPData = {};
