@@ -57,10 +57,10 @@ MPWidget.Image.New = function (image)
 
     return $(strVar);
 };
-MPWidget.Image.Bind = function (parent)
+MPWidget.Image.Bind = function ()
 {
     //点击编辑按钮
-    parent.on("click", ".widget-image .edit", edit_click)
+    $(document).on("click", ".widget-image .edit", edit_click)
         //点击转存按钮
     .on("click", ".widget-image .repin", repin_click)
         //点击赞按钮

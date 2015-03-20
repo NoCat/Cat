@@ -96,7 +96,7 @@ public static class JSON
         var followerCount = DB.SExecuteScalar("select count(*) from following where type=? and info=?", MPFollowingTypes.Package, package.ID);
 
         result.imageCount = Convert.ToInt32(imageCount);
-        result.followedCount = Convert.ToInt32(followerCount);
+        result.followerCount = Convert.ToInt32(followerCount);
 
         var user = new MPUser(package.UserID);
         result.user = User(user);

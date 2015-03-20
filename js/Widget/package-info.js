@@ -5,6 +5,7 @@ MPWidget.PackageInfo.New=function(packageDetail)
 {
     var strVar = "";
     strVar += "<div class=\"widget-packageinfo\">";
+    strVar += "<div class=\"inner\">";
     strVar += "    <div class=\"bar1\">";
     strVar += "        <h1 class=\"title\">{0}<\/h1>".Format(packageDetail.title);
     strVar += "        <div class=\"action-btns\">";
@@ -28,11 +29,12 @@ MPWidget.PackageInfo.New=function(packageDetail)
     strVar += "            <div class=\"tab follower\">{0}人关注<\/div>".Format(packageDetail.followerCount);
     strVar += "        <\/div>";
     strVar += "    <\/div>";
+    strVar += "    <\/div>";
     strVar += "     <div class=\"waterfall\"></div>";
     strVar += "<\/div>";
 
     var content = $(strVar);
-    content.Waterfall = MPWaterFall.New($(window), content.find(".waterfall"), 4, 236, 6, 6, 6, 6);
+    content.waterfall = MPWaterFall.New($(window), content.find(".waterfall"), 4, 236, 6, 6, 6, 6);
 
     return content;
 }

@@ -1,4 +1,5 @@
-﻿/// <reference path="Widget/package.js" />
+﻿/// <reference path="Widget/Image.js" />
+/// <reference path="Widget/package.js" />
 /// <reference path="main.js" />
 /// <reference path="Widget/Image.js" />
 /// <reference path="Widget/package.js" />
@@ -17,7 +18,7 @@ $(function () {
             break;
 
         default:
-            waterfallPush(packageInfo, MPWidget.Package, null, "id");
+            waterfallPush(packageInfo, MPWidget.Image, null, "id");
             break;
     }
 

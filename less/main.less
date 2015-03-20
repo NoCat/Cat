@@ -219,10 +219,11 @@ table {
 }
 
 .widget-packageinfo {
-    border-radius: 5px;
-    box-shadow: 0 0 5px lighten(@baseGrey,30%);
-    background-color: @baseWhite;
-
+    .inner {
+        border-radius: 5px;
+        box-shadow: 0 0 5px lighten(@baseGrey,30%);
+        background-color: @baseWhite;
+    }
 
     .bar1 {
         font-size: 14px;
@@ -1313,8 +1314,8 @@ table {
             content: "关注";
         }
 
-        &.unfollow::after{
-            content:"已关注";
+        &.unfollow::after {
+            content: "已关注";
         }
     }
 }

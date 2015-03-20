@@ -1,4 +1,6 @@
-﻿/// <reference path="jquery.js" />
+﻿/// <reference path="Widget/Image.js" />
+/// <reference path="Widget/Image.js" />
+/// <reference path="jquery.js" />
 /// <reference path="carhartl-jquery-cookie-92b7715/jquery.cookie.js" />
 
 String.prototype.Format = function (arg1, arg2)
@@ -26,6 +28,7 @@ String.prototype.FormatNoEncode=function(arg1,arg2)
         return args[parseInt(word.substring(1, word.length - 1))].toString();
     })
 }
+
 MPData = {};
 MPWidget = {};
 MPFormat = {};
@@ -446,4 +449,5 @@ function MPCheckInEle(node, point)
         return false;
     }
 }
+
 
