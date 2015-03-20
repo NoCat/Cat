@@ -1115,18 +1115,19 @@ table {
         top: 10px;
         left: 10px;
         right: 10px;
-        height: @height;
         display: none;
         z-index: 3;
 
         .left {
-            float: left;
-            height: @height;
+            position:absolute;
+            top:0;
+            left:0;
         }
 
         .right {
-            float: right;
-            height: @height;
+            position:absolute;
+            top:0;
+            right:0;
         }
 
         .repin {
