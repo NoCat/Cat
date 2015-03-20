@@ -7,13 +7,14 @@
 MPWidget.Image = {};
 MPWidget.Image.Description = function (description)
 {
+        description = MPHtmlEncode(description);
         return description.replace(/(#.*#)/g, function (word)
         {
             var w = $.trim(word.substring(1, word.length - 1));
             if (w == "")
                 return word;
 
-            return "<a href=\"/search/{0}\">{1}</a>".Format(encodeURIComponent(w), word);
+            return "<a href=\"/search/{0}\">{1}</a>".FormatNoEncode(encodeURIComponent(w), word);
         });
 };
 MPWidget.Image.New = function (image)
@@ -42,7 +43,7 @@ MPWidget.Image.New = function (image)
     strVar += "        <img src=\"{0}\" width=\"236\" height=\"{1}\" />".Format(imageHost + "/" + image.file.hash + "_fw236", Math.ceil(236 * image.file.height / image.file.width));
     strVar += "        <div class=\"cover\"><\/div>";
     strVar += "    <\/a>";
-    strVar += "    <div class=\"description\">{0}<\/div>".Format(this.Description(image.description));
+    strVar += "    <div class=\"description\">{0}<\/div>".FormatNoEncode(this.Description(image.description));
     strVar += "    <div class=\"info\">";
     strVar += "        <a class=\"avt\" href=\"{0}\">".Format(fuser.Home());
     strVar += "            <img src=\"{0}\" />".Format(fuser.Avt());
@@ -56,10 +57,10 @@ MPWidget.Image.New = function (image)
 
     return $(strVar);
 };
-MPWidget.Image.Bind = function (parent)
+MPWidget.Image.Bind = function ()
 {
     //点击编辑按钮
-    parent.on("click", ".widget-image .edit", edit_click)
+    $(document).on("click", ".widget-image .edit", edit_click)
         //点击转存按钮
     .on("click", ".widget-image .repin", repin_click)
         //点击赞按钮

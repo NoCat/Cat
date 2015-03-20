@@ -33,7 +33,10 @@
     <script src='<%=ResolveClientUrl("~/js/Widget/package.js") %>'></script>
     <script src='<%=ResolveClientUrl("~/js/Widget/image-view.js") %>'></script>
     <script src='<%=ResolveClientUrl("~/js/Widget/user-info.js") %>'></script>
+    <script src='<%=ResolveClientUrl("~/js/Widget/package-info.js") %>'></script>
     <script src='<%=ResolveClientUrl("~/js/Widget/window.js") %>'></script>
+
+    <script src='<%=ResolveClientUrl("~/js/initialize.js") %>'></script>
     <%
         var page = Page as MPPage;        
     %>

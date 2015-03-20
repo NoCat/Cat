@@ -5,7 +5,6 @@ $(function ()
 {
     var frame = MPWidget.Frame.New();
     var waterfall = $("<div/>").addClass("waterfall");
-    MPWidget.Image.Bind(waterfall);
     frame.Body.append(waterfall);
     $("body").append(frame);
 

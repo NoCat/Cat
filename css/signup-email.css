@@ -170,7 +170,7 @@ table {
 .body {
   margin-top: 60px;
 }
-.widget-packageinfo {
+.widget-packageinfo .inner {
   border-radius: 5px;
   box-shadow: 0 0 5px #b3b3b3;
   background-color: #ffffff;

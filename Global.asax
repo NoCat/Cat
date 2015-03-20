@@ -6,9 +6,10 @@
     {
         routes.MapPageRoute("home", "", "~/default.aspx", false);
         routes.MapPageRoute("all", "all", "~/all.aspx", false);
-        routes.MapPageRoute("ajax", "ajax/{act}", "~/ajax.aspx", false);        
-        routes.MapPageRoute("package", "package/{id}", "~/package.aspx", false);
+        routes.MapPageRoute("ajax", "ajax/{act}", "~/ajax.aspx", false); 
         routes.MapPageRoute("image", "image/{id}", "~/image.aspx", false);
+        routes.MapPageRoute("package", "package/{id}", "~/package.aspx", false);
+        routes.MapPageRoute("package_sub1", "package/{id}/{sub1}", "~/package.aspx", false);
         routes.MapPageRoute("user", "user/{id}", "~/user.aspx", false);
         routes.MapPageRoute("user_sub1", "user/{id}/{sub1}", "~/user.aspx", false);
         routes.MapPageRoute("user_sub2", "user/{id}/{sub1}/{sub2}", "~/user.aspx", false);
