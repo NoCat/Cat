@@ -43,7 +43,7 @@ MPWidget.ImageView.New = function (imageDetail)
     var res = $(strVar);
     res.Run = function ()
     {
-        var wf = MPWaterFall.New(res.find(".images"), res.find(".image-waterfall"), 3, 76, 1, 1, 1, 1);
+        var wf = MPWaterFall.New(res.find(".images"), res.find(".image-waterfall"), 3, 76, 1, 1, 1, 1,false);
         var max = 0;
         wf.onBottom = function ()
         {
