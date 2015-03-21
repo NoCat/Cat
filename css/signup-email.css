@@ -1051,17 +1051,18 @@ table {
   top: 10px;
   left: 10px;
   right: 10px;
-  height: 40px;
   display: none;
   z-index: 3;
 }
 .widget-image .actions .left {
-  float: left;
-  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .widget-image .actions .right {
-  float: right;
-  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .widget-image .actions .repin {
   padding: 0 13px;
