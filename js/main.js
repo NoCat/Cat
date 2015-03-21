@@ -77,21 +77,18 @@ var MPWaterFall = {
             return item;
         }
     },
-    New: function (frame, container, columnCount, itemWidth, marginLeft, marginTop, marginRight, marginBottom, onResize) {
+    New: function (frame, container, columnCount, itemWidth, marginLeft, marginTop, marginRight, marginBottom, autoResize) {
 
         var waterFall = {};
 
         //定义是否自动排列,默认为自动,关闭自动排列该参数为false
-        if (onResize == undefined || onResize == null) {
-            waterFall.onResize = true;
-            if (countColumn()) {
+
+
+        autoResize = ((autoResize!=undefined) ? autoResize : true);
+        if (autoResize == true) {
                 var wwidth = $(window).width();
                 columnCount = countColumn();
                 $(".wrapper").css("width", columnCount * (itemWidth + marginLeft + marginRight));
-            };
-        }
-        else {
-            waterFall.onResize = false;
         }
 
         //列数 
@@ -281,13 +278,11 @@ var MPWaterFall = {
         Resize();
 
         function Resize() {
-            if (waterFall.onResize) {
+            if (autoResize) {
                 $(window).on("resize", function () {
-                    if (countColumn()) {
                         var c = countColumn();
                         $(".wrapper").css("width", c * (itemWidth + marginLeft + marginRight));
                         waterFall.ColumnCount(c);
-                    }
                 })
             }
         }
@@ -301,7 +296,7 @@ var MPWaterFall = {
             }
 
             if (count < 4) {
-                return false;
+                return 4;
             }
             else if (count > 6) {
                 return 6;
