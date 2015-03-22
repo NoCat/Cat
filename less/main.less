@@ -449,6 +449,109 @@ table {
     .ad-piece {
         height: 250px;
     }
+
+    .info-piece {
+        @avtSize: 50px;
+
+        .info {
+
+
+            .avt {
+                float: left;
+
+                img {
+                    width: @avtSize;
+                    height: @avtSize;
+                }
+            }
+
+            .info-main, .sub {
+                margin-left: @avtSize+10px;
+            }
+
+            .info-main {
+                height: ceil( 0.6*@avtSize);
+                font-size: ceil(0.6*@avtSize*0.65);
+                line-height: ceil(0.6*@avtSize);
+            }
+
+            .sub {
+                height: ceil( 0.4*@avtSize);
+                font-size: ceil(0.4*@avtSize*0.65);
+                line-height: ceil(0.4*@avtSize);
+            }
+        }
+
+        .description {
+            font-size: 14px;
+            margin-top: 15px;
+            padding: 10px;
+            background: darken(@baseWhite,3%);
+        }
+
+        .comments {
+            margin: 10px -15px 0 -15px;
+
+            .comment {
+                padding: 15px;
+                border-top: 1px solid darken(@baseWhite,8%);
+
+                .avt {
+                    float: left;
+
+                    img {
+                        width: @avtSize;
+                        height: @avtSize;
+                    }
+                }
+
+                .name {
+                    display:block;
+                    font-size: 15px;
+                }
+
+                .text {
+                    font-size: 14px;
+                    margin-top:4px;
+                }
+
+                .name, .text {
+                    padding-left: @avtSize+10px;
+                }
+            }
+        }
+
+        .add-comment{
+            margin:0 -15px;
+            padding:15px;
+            border-top: 1px solid darken(@baseWhite,8%);
+
+            .avt{
+                .comments.comment.avt;
+            }
+
+            .new-comment{
+                padding-left:@avtSize+10px;
+                width:auto;
+
+                textarea{
+                    width:601px;
+                    height:60px;
+                    border:1px solid darken(@baseWhite,20%);
+                    border-radius:3px;
+                    padding:4px;
+                    font-size:14px;
+                    resize:none;
+                }
+            }
+
+            .submit{
+                float:right;
+                .btnblue(28px);        
+                margin-top:10px;        
+            }
+        }
+    }
 }
 
 .dialog-mask {
@@ -1119,15 +1222,15 @@ table {
         z-index: 3;
 
         .left {
-            position:absolute;
-            top:0;
-            left:0;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .right {
-            position:absolute;
-            top:0;
-            right:0;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
 
         .repin {

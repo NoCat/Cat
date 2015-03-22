@@ -110,7 +110,7 @@ public static class JSON
             {
                 praised = true;
             }
-            if (DB.SExecuteScalar("select userid from follow where userid=? and type=? and info=?", currentUser.ID, MPFollowingTypes.Package, package.ID) != null)
+            if (DB.SExecuteScalar("select userid from following where userid=? and type=? and info=?", currentUser.ID, MPFollowingTypes.Package, package.ID) != null)
             {
                 praised = true;
             }
