@@ -112,9 +112,19 @@ public class MPUser
         }
     }
 
-    public MPUser(string email)
+    public MPUser(string str,MPUserConstructTypes type= MPUserConstructTypes.Email)
     {
-        Initialize("email=?", email);
+        switch (type)
+        {
+            case MPUserConstructTypes.Email:
+                Initialize("email=?", str);
+                break;
+            case MPUserConstructTypes.Username:
+                Initialize("username=?", str);
+                break;
+        }
+
+
     }
 
     void Initialize(string condition, params object[] objs)
@@ -175,8 +185,6 @@ public class MPUser
         else
             return true;
     }
-
-
 }
 
 public enum UserAuthorities
@@ -189,4 +197,10 @@ public enum UserAuthorities
     /// 一般用户
     /// </summary>
     Normal = 1
+}
+
+public enum MPUserConstructTypes
+{
+    Email,
+    Username
 }

@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h2>基础类型</h2>
+    <div class="classes">
+        <div class="class">
+            <a class="title" id="class_user">user</a>
+            <div class="description">用户基本信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">用户id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">name</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">用户名</td>
+                </tr>
+                <tr>
+                    <td class="column_name">default_head</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">是否使用默认头像</td>
+                </tr>
+            </table>
+        </div>
+        <div class="class">
+            <a class="title" id="class_package">package</a>
+            <div class="description">图包基本信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图包id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">title</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">图包标题</td>
+                </tr>
+            </table>
+        </div>
+        <div class="class">
+            <a class="title" id="class_file">file</a>
+            <div class="description">文件信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">hash</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">文件hash</td>
+                </tr>
+                <tr>
+                    <td class="column_name">width</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">宽度</td>
+                </tr>
+                <tr>
+                    <td class="column_name">height</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">高度</td>
+                </tr>
+            </table>
+        </div>
+        <div class="class">
+            <a class="title" id="class_image">image</a>
+            <div class="description">图片信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图片id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">file</td>
+                    <td class="column_type"><a href="#class_file">file</a></td>
+                    <td class="column_description">图片对应文件</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="class">
+            <a class="title" id="class_imageDetail">imageDetail</a>
+            <div class="description">图片信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图片id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">package</td>
+                    <td class="column_type"><a href="#class_package">package</a></td>
+                    <td class="column_description">所属图包</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user">user</a></td>
+                    <td class="column_description">创建用户</td>
+                </tr>
+                <tr>
+                    <td class="column_name">file</td>
+                    <td class="column_type"><a href="#class_file">file</a></td>
+                    <td class="column_description">图片对应文件</td>
+                </tr>
+                <tr>
+                    <td class="column_name">description</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">图片描述</td>
+                </tr>
+                <tr>
+                    <td class="column_name">praised</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">是否被赞过</td>
+                </tr>
+                <tr>
+                    <td class="column_name">comments</td>
+                    <td class="column_type"><a href="#class_comment">coment</a>[]</td>
+                    <td class="column_description">是否被赞过</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="class">
+            <a class="title" id="class_packageDetail">packageDetail</a>
+            <div class="description">图包详细信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图包id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">title</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">图包标题</td>
+                </tr>
+                <tr>
+                    <td class="column_name">thumbs</td>
+                    <td class="column_type"><a href="#class_image">Image</a>[]</td>
+                    <td class="column_description">缩略图,最多四张,第一张为封面图</td>
+                </tr>
+                <tr>
+                    <td class="column_name">imageCount</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图包内图片数量</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user">user</a></td>
+                    <td class="column_description">图包创建人</td>
+                </tr>
+                <tr>
+                    <td class="column_name">followerCount</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">关注人数</td>
+                </tr>
+                <tr>
+                    <td class="column_name">description</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">图包描述</td>
+                </tr>
+                <tr>
+                    <td class="column_name">praised</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">（图包非自己创建时）是否赞过</td>
+                </tr>
+                <tr>
+                    <td class="column_name">followed</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">（图包非自己创建时）是否关注</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="class">
+            <a class="title" id="class_userDetail">userDetail</a>
+            <div class="description">用户详细信息</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">用户id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">name</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">用户名称</td>
+                </tr>
+                <tr>
+                    <td class="column_name">default_head</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">是否使用默认头像</td>
+                </tr>
+                <tr>
+                    <td class="column_name">follows_count</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">关注数</td>
+                </tr>
+                <tr>
+                    <td class="column_name">followers_count</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">粉丝数</td>
+                </tr>
+                <tr>
+                    <td class="column_name">packages_count</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图包数</td>
+                </tr>
+                <tr>
+                    <td class="column_name">images_count</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">图片数</td>
+                </tr>
+                <tr>
+                    <td class="column_name">praise_count</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">赞过的数量</td>
+                </tr>
+                <tr>
+                    <td class="column_name">followed</td>
+                    <td class="column_type">bool</td>
+                    <td class="column_description">（图包非自己创建时）是否关注</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="class">
+            <a class="title" id="class_comment">comment</a>
+            <div class="description">评论</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">评论id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user">user</a></td>
+                    <td class="column_description">此评论的用户</td>
+                </tr>
+                <tr>
+                    <td class="column_name">text</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">评论的内容</td>
+                </tr>
+                <tr>
+                    <td class="column_name">time</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">评论的时间</td>
+                </tr>
+                <tr>
+                    <td class="column_name">mention</td>
+                    <td class="column_type"><a href="#class_mention">mention</a>[]</td>
+                    <td class="column_description">评论@的人</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="class">
+            <a class="title" id="class_mention">mention</a>
+            <div class="description">评论提及的人</div>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user_id</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">提及的人的id</td>
+                </tr>
+                <tr>
+                    <td class="column_name">pos</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">开始的位置</td>
+                </tr>
+                <tr>
+                    <td class="column_name">len</td>
+                    <td class="column_type">int</td>
+                    <td class="column_description">长度</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>页面数据</h2>
+    <div class="page_data">
+        <div class="page">
+            <a class="title" id="page_all">all</a>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user"> user</a></td>
+                    <td class="column_description">当前已经登录的用户,若未登录,user.id为0,其余两个参数忽略</td>
+                </tr>
+                <tr>
+                    <td class="column_name">images</td>
+                    <td class="column_type"><a href="#class_imageDetail">imageDetail</a>[]</td>
+                    <td class="column_description">图片列表</td>
+                </tr>
+            </table>
+        </div>
+        <div class="page">
+            <a class="title" id="page_following">following</a>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user"> user</a></td>
+                    <td class="column_description">当前已经登录的用户,若未登录,user.id为0,其余两个参数忽略</td>
+                </tr>
+                <tr>
+                    <td class="column_name">images</td>
+                    <td class="column_type"><a href="#class_imageDetail">imageDetail</a>[]</td>
+                    <td class="column_description">图片列表</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page">
+            <a class="title" id="page_package">package</a>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user"> user</a></td>
+                    <td class="column_description">当前已经登录的用户,若未登录,user.id为0,其余两个参数忽略</td>
+                </tr>
+                <tr>
+                    <td class="column_name">package</td>
+                    <td class="column_type"><a href="#class_packageDetail">packageDetail</a></td>
+                    <td class="column_description">图包详情</td>
+                </tr>
+                <tr>
+                    <td class="column_name">sub1</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">子页1,可能的取值"follower"</td>
+                </tr>
+                <tr>
+                    <td class="column_name">datas</td>
+                    <td class="column_type">Array</td>
+                    <td class="column_description">数组,不同情况有不同取值</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page">
+            <a class="title" id="page_image">image</a>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user">user</a></td>
+                    <td class="column_description">当前已经登录的用户,若未登录,user.id为0,其余两个参数忽略</td>
+                </tr>
+                <tr>
+                    <td class="column_name">image</td>
+                    <td class="column_type"><a href="#class_imageDetail">imageDetail</a></td>
+                    <td class="column_description">图片信息</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page">
+            <a class="title" id="page_user">user</a>
+            <table>
+                <tr>
+                    <td class="column_name">名称</td>
+                    <td class="column_type">类型</td>
+                    <td class="column_description">说明</td>
+                </tr>
+                <tr>
+                    <td class="column_name">user</td>
+                    <td class="column_type"><a href="#class_user">user</a></td>
+                    <td class="column_description">当前已经登录的用户,若未登录,user.id为0,其余两个参数忽略</td>
+                </tr>
+                <tr>
+                    <td class="column_name">page_user</td>
+                    <td class="column_type"><a href="#class_userDetail">userDetail</a></td>
+                    <td class="column_description">图片信息</td>
+                </tr>
+                <tr>
+                    <td class="column_name">sub1</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">子页1,可能的取值("follower"."following","image","praise")</td>
+                </tr>
+                <tr>
+                    <td class="column_name">sub2</td>
+                    <td class="column_type">string</td>
+                    <td class="column_description">子页2,可能的取值(following{"package"},praise{"package"})</td>
+                </tr>
+                <tr>
+                    <td class="column_name">datas</td>
+                    <td class="column_type">Array</td>
+                    <td class="column_description">附带的数组,根据不同的情况有不同类型</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

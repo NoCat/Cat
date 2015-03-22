@@ -398,6 +398,101 @@ table {
 .image-view .ad-piece {
   height: 250px;
 }
+.image-view .info-piece .info .avt {
+  float: left;
+}
+.image-view .info-piece .info .avt img {
+  width: 50px;
+  height: 50px;
+}
+.image-view .info-piece .info .info-main,
+.image-view .info-piece .info .sub {
+  margin-left: 60px;
+}
+.image-view .info-piece .info .info-main {
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+}
+.image-view .info-piece .info .sub {
+  height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.image-view .info-piece .description {
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 10px;
+  background: #f7f7f7;
+}
+.image-view .info-piece .comments {
+  margin: 10px -15px 0 -15px;
+}
+.image-view .info-piece .comments .comment {
+  padding: 15px;
+  border-top: 1px solid #ebebeb;
+}
+.image-view .info-piece .comments .comment .avt {
+  float: left;
+}
+.image-view .info-piece .comments .comment .avt img {
+  width: 50px;
+  height: 50px;
+}
+.image-view .info-piece .comments .comment .name {
+  display: block;
+  font-size: 15px;
+}
+.image-view .info-piece .comments .comment .text {
+  font-size: 14px;
+  margin-top: 4px;
+}
+.image-view .info-piece .comments .comment .name,
+.image-view .info-piece .comments .comment .text {
+  padding-left: 60px;
+}
+.image-view .info-piece .add-comment {
+  margin: 0 -15px;
+  padding: 15px;
+  border-top: 1px solid #ebebeb;
+}
+.image-view .info-piece .add-comment .avt {
+  float: left;
+}
+.image-view .info-piece .add-comment .avt img {
+  width: 50px;
+  height: 50px;
+}
+.image-view .info-piece .add-comment .new-comment {
+  padding-left: 60px;
+  width: auto;
+}
+.image-view .info-piece .add-comment .new-comment textarea {
+  width: 601px;
+  height: 60px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 14px;
+  resize: none;
+}
+.image-view .info-piece .add-comment .submit {
+  float: right;
+  padding: 0 14px;
+  font-size: 14px;
+  line-height: 26px;
+  height: 26px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #0099cc;
+  border: 1px solid #007aa3;
+  margin-top: 10px;
+}
+.image-view .info-piece .add-comment .submit:hover {
+  background-color: #0086b3;
+}
 .dialog-mask {
   position: fixed;
   z-index: 1000;
