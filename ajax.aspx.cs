@@ -366,7 +366,7 @@ public partial class ajax : System.Web.UI.Page
                         var image = new MPImage(imageId);
 
                         int commentId = MPComment.Create(image.ID, user.ID, text);
-                        Response.Write(JSON.Stringify(new { code = 0, msg = "ok", id = commentId }));
+                        Response.Write(Tools.JSONStringify(new { code = 0, msg = "ok", id = commentId }));
                     }
                     break;
                 #endregion
