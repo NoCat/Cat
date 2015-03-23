@@ -105,18 +105,17 @@ MPWidget.Image.Bind = function ()
         var hash = t.attr("data-hash");
         //获取要转存图片的描述内容用作初始描述
         var description = t.attr("data-description");
-        var dialog = MPCreateImageDialog.New(imageHost + "/" + hash + "_fw235", "转存", description);
+        var dialog = MPCreateImageDialog.New(imageHost + "/" + hash + "_fw236", "转存", description);
         dialog.onOK = function ()
         {
             $.post(host + "/ajax/resave", { image_id: id, package_id: dialog.packageId, description: MPHtmlEncode(dialog.description) }, function (data)
             {
-                if (data == 0)
+                if (data.code == 0)
                 {
                     var box = MPMessageBox.New("ok", "转存成功");
-                    setTimeout(function ()
-                    {
-                        box.Close();
-                    }, 1000);
+                    box.onOK = function () {
+                        dialog.Close();
+                    }
                     //转存成功后的处理,默认提示成功后一秒钟关闭
                 }
             }, "json");
