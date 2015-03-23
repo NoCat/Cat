@@ -20,6 +20,43 @@ public static class JSON
         };
     }
 
+    public static object Comment(MPComment comment)
+    {
+        int id = comment.ID;
+        MPUser user = new MPUser(comment.UserID);
+        string text = comment.Text;
+        string time = comment.CreatedTime.ToString();
+
+        List<object> mentions = new List<object>();
+        var res = DB.SExecuteReader("select id from comment_mention where commentid=?", id);
+        foreach (var item in res)
+        {
+            mentions.Add(Mention(new MPCommentMention(Convert.ToInt32(item[0]))));
+        }
+
+        return new
+        {
+            id = id,
+            user = User(user),
+            text = text,
+            time = time,
+            mentions = mentions
+        };
+    }
+
+    public static object Mention(MPCommentMention mention)
+    {
+        int id = mention.UserID;
+        int pos = mention.Position;
+        int len = mention.Length;
+        return new
+        {
+            user_id = id,
+            pos = pos,
+            len = len
+        };
+    }
+
     public static object UserDetail(MPUser user, MPUser currentUser)
     {
         int followsCount = 0;
@@ -137,6 +174,15 @@ public static class JSON
             }
         }
 
+        List<object> comments = new List<object>();
+        var res = DB.SExecuteReader("select id from comment where imageid=?", image.ID);
+        foreach (var item in res)
+        {
+            comments.Add(Comment(new MPComment(Convert.ToInt32(item[0]))));
+        }
+
+        string time = image.CreatedTime.ToString();
+
         return new
         {
             id = image.ID,
@@ -144,7 +190,9 @@ public static class JSON
             package = Package(package),
             file = File(file),
             description = image.Description,
-            praised = praised
+            praised = praised,
+            comments = comments,
+            time = time
         };
     }
 
